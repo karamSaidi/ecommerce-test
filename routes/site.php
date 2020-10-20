@@ -10,7 +10,7 @@ Route::group(
     ],
     function () {
         Route::get('/site', function () {
-            return view('welcome');
+            return 'site route';
         });
     }
 ); // ./ localization

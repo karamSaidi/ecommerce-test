@@ -13,9 +13,9 @@ Route::group(
 
 
 
-        // Route::get('/', function () {
-        //     return view('welcome');
-        // });
+        Route::get('/', function () {
+            return 'web route';
+        });
 
         Auth::routes();
 

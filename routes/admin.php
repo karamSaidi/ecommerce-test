@@ -10,7 +10,7 @@ Route::group(
     ],
     function () {
         Route::get('/admin', function () {
-            return view('welcome');
+            return view('admin.dashboard');
         });
     }
 ); // ./ localization
