@@ -1,5 +1,6 @@
 <?php
 
+
 use Illuminate\Support\Facades\Route;
 
 Route::group(
@@ -8,20 +9,8 @@ Route::group(
         'middleware' => ['localeSessionRedirect', 'localizationRedirect', 'localeViewPath']
     ],
     function () {
-
-        // use Illuminate\Support\Facades\Route;
-
-
-
-        // Route::get('/', function () {
-        //     return view('welcome');
-        // });
-
-        Auth::routes();
-
-        // Route::get('/home', [HomeController::class, 'index'])->name('home');
-
-
-
+        Route::get('/site', function () {
+            return view('welcome');
+        });
     }
 ); // ./ localization
