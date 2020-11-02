@@ -59,6 +59,7 @@
     <link rel="stylesheet" type="text/css" href="../../../assets/css/style.css">
     <!-- END Custom CSS-->
 
+    @stack('style')
 
 </head>
 
@@ -118,6 +119,8 @@
     <!-- BEGIN PAGE LEVEL JS-->
     <script src="{{asset('assets/admin')}}/js/scripts/pages/dashboard-ecommerce.js" type="text/javascript"></script>
     <!-- END PAGE LEVEL JS-->
+
+    @stack('scripts')
 </body>
 
 </html>
