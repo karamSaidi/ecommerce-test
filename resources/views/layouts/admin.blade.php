@@ -86,7 +86,9 @@
                 <div class="content-body row">
                     @include('layouts.partials.alerts')
 
-                    @yield('content')
+                    <div class="col-12">
+                        @yield('content')
+                    </div>
                 </div><!-- ./content-body -->
 
             </div><!-- /.content-wrapper -->
@@ -94,11 +96,12 @@
         </div><!-- /.app-content -->
 
 
+        @include('admin.partials.footer')
     </div>
     <!-- ./app -->
 
 
-    @include('admin.partials.footer')
+
     @notify_js
     @notify_render
     <!-- Scripts -->
