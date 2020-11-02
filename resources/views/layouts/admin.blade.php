@@ -28,7 +28,7 @@
 
 
 
-    <title>{{ config('app.name') }} @yield('page_title')</title>
+    <title> @hasSection ('page_title') @yield('page_title') | @endif {{ config('app.name') }}</title>
     <link rel="apple-touch-icon" href="{{asset('assets/admin')}}/images/ico/apple-icon-120.png">
     <link rel="shortcut icon" type="image/x-icon" href="{{asset('assets/admin')}}/images/ico/favicon.ico">
     <link
@@ -84,6 +84,8 @@
                 </div><!-- ./content-header -->
 
                 <div class="content-body row">
+                    @include('layouts.partials.alerts')
+
                     @yield('content')
                 </div><!-- ./content-body -->
 
@@ -96,8 +98,9 @@
     <!-- ./app -->
 
 
-
-
+    @include('admin.partials.footer')
+    @notify_js
+    @notify_render
     <!-- Scripts -->
     {{-- <script src="{{ asset('js/app.js') }}"></script> --}}
     <!-- BEGIN VENDOR JS-->

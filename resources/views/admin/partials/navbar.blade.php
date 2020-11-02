@@ -10,7 +10,7 @@
                 <li class="nav-item">
                     <a class="navbar-brand" href="index.html">
                         <img class="brand-logo" alt="modern admin logo"
-                            src=".{{asset('assets/admin')}}/images/logo/logo.png">
+                            src="{{asset('assets/admin')}}/images/logo/logo.png">
                         <h3 class="brand-text">Modern Admin</h3>
                     </a>
                 </li>
@@ -36,7 +36,7 @@
                                 <div id="mega-menu-carousel-example">
                                     <div>
                                         <img class="rounded img-fluid mb-1"
-                                            src=".{{asset('assets/admin')}}/images/slider/slider-2.png"
+                                            src="{{asset('assets/admin')}}/images/slider/slider-2.png"
                                             alt="First slide"><a class="news-title mb-0" href="#">Poster Frame
                                             PSD</a>
                                         <p class="news-content">
@@ -213,7 +213,7 @@
                                 <span class="user-name text-bold-700">John Doe</span>
                             </span>
                             <span class="avatar avatar-online">
-                                <img src=".{{asset('assets/admin')}}/images/portrait/small/avatar-s-19.png"
+                                <img src="{{asset('assets/admin')}}/images/portrait/small/avatar-s-19.png"
                                     alt="avatar"><i></i></span>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right"><a class="dropdown-item" href="#"><i
@@ -344,7 +344,7 @@
                                     <div class="media">
                                         <div class="media-left">
                                             <span class="avatar avatar-sm avatar-online rounded-circle">
-                                                <img src=".{{asset('assets/admin')}}/images/portrait/small/avatar-s-19.png"
+                                                <img src="{{asset('assets/admin')}}/images/portrait/small/avatar-s-19.png"
                                                     alt="avatar"><i></i></span>
                                         </div>
                                         <div class="media-body">
@@ -362,7 +362,7 @@
                                     <div class="media">
                                         <div class="media-left">
                                             <span class="avatar avatar-sm avatar-busy rounded-circle">
-                                                <img src=".{{asset('assets/admin')}}/images/portrait/small/avatar-s-2.png"
+                                                <img src="{{asset('assets/admin')}}/images/portrait/small/avatar-s-2.png"
                                                     alt="avatar"><i></i></span>
                                         </div>
                                         <div class="media-body">
@@ -380,7 +380,7 @@
                                     <div class="media">
                                         <div class="media-left">
                                             <span class="avatar avatar-sm avatar-online rounded-circle">
-                                                <img src=".{{asset('assets/admin')}}/images/portrait/small/avatar-s-3.png"
+                                                <img src="{{asset('assets/admin')}}/images/portrait/small/avatar-s-3.png"
                                                     alt="avatar"><i></i></span>
                                         </div>
                                         <div class="media-body">
@@ -398,7 +398,7 @@
                                     <div class="media">
                                         <div class="media-left">
                                             <span class="avatar avatar-sm avatar-away rounded-circle">
-                                                <img src=".{{asset('assets/admin')}}/images/portrait/small/avatar-s-6.png"
+                                                <img src="{{asset('assets/admin')}}/images/portrait/small/avatar-s-6.png"
                                                     alt="avatar"><i></i></span>
                                         </div>
                                         <div class="media-body">

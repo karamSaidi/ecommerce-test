@@ -1,8 +1,8 @@
 @extends('layouts.admin')
 
-@section('page_title', '| Dashboard')
+@section('page_title', 'Dashboard')
 
-@section('conent')
+@section('content')
 
 
 <!-- eCommerce statistic -->
