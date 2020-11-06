@@ -1,5 +1,9 @@
 <?php
 return [
-    'shipping_setting' => 'Shipping Setting',
+    'name' => 'Name',
+    'value' => 'Value',
+    'enable_method' => 'Enable this method',
+
+
 
 ];

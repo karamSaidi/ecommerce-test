@@ -29,7 +29,8 @@ Route::group(
 
                 /*************************** setting */
                 Route::group(['prefix' => 'settings'], function () {
-                    Route::get('/shipping/{type?}', 'SettingController@edit_shipping')->name('settings.shipping.edit');
+                    Route::get('shipping/{type?}', 'SettingController@edit_shipping')->name('settings.shipping.edit');
+                    Route::put('shipping/{id}', 'SettingController@update_shipping')->name('settings.shipping.update');
                 });
                 /*************************** ./setting */
             });

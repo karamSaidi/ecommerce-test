@@ -12,11 +12,12 @@ class Setting extends Model implements TranslatableContract
 {
     use HasFactory, Translatable;
 
-    public $fillable = ['key', 'is_translatable', 'plain_value'];
+    public $fillable = ['key', 'is_translatable', 'plain_value', 'status'];
     protected $translatedAttributes = ['value'];
 
     protected $casts = [
         'is_translatable' => 'boolean',
+        'status' => 'boolean',
     ];
 
     /************************ static function to insert data by key => value ******************* */
