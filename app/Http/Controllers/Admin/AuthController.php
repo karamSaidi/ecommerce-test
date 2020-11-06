@@ -21,11 +21,11 @@ class AuthController extends Controller
 
         if (Auth::guard('admin')->attempt($cert, $remember_me)) {
             return redirect(route('admin.dashboard'))
-                ->with(['success' => 'Login successfely']);
+                ->with(['success' => __('auth.login_success')]);
         }
 
         return redirect()->route('admin.login')
-            ->with(['error' => 'login vaild ... check your email and password']);
+            ->with(['error' => __('auth.login_failed')]);
     } // ./do_login
 
 

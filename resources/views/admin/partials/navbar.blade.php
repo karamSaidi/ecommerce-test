@@ -1,6 +1,6 @@
-<!-- fixed-top-->
 <nav
-    class="header-navbar navbar-expand-md navbar navbar-with-menu navbar-without-dd-arrow fixed-top navbar-semi-light bg-info navbar-shadow">
+    class="header-navbar navbar-expand-md navbar navbar-with-menu navbar-without-dd-arrow fixed-top navbar-semi-dark navbar-shadow">
+
     <div class="navbar-wrapper">
         <div class="navbar-header">
             <ul class="nav navbar-nav flex-row">
@@ -11,7 +11,7 @@
                     <a class="navbar-brand" href="index.html">
                         <img class="brand-logo" alt="modern admin logo"
                             src="{{asset('assets/admin')}}/images/logo/logo.png">
-                        <h3 class="brand-text">Modern Admin</h3>
+                        <h3 class="brand-text">{{config('app.name')}}</h3>
                     </a>
                 </li>
                 <li class="nav-item d-md-none">
