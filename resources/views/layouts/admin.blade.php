@@ -26,7 +26,9 @@
     <!-- END VENDOR CSS-->
     <!-- BEGIN MODERN CSS-->
     <link rel="stylesheet" type="text/css" href="{{asset('assets/admin')}}/{{get_style_derection()}}/app.css">
+    @if(get_direction() == 'rtl')
     <link rel="stylesheet" type="text/css" href="{{asset('assets/admin')}}/{{get_style_derection()}}/custom-rtl.css">
+    @endif
     <!-- END MODERN CSS-->
     <!-- BEGIN Page Level CSS-->
     <link rel="stylesheet" type="text/css"
@@ -53,6 +55,8 @@
                 @yield('content-header')
             </div>
             <div class="content-body">
+                @include('layouts.partials.alerts')
+
                 @yield('content')
             </div>
         </div>
