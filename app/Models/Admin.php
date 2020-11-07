@@ -22,6 +22,8 @@ class Admin extends Authenticatable
         'name',
         'email',
         'password',
+        'avatar',
+        'status',
         'email_verified_at',
     ];
 
@@ -42,5 +44,15 @@ class Admin extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'status' => 'boolean',
     ];
+
+    protected $append = [
+        'avatar_url',
+    ];
+
+    public function getAvatarUrlAttribute()
+    {
+        return $this->avatar ? asset('upload/admin/avatar/' . $this->avatar) : null;
+    }
 }

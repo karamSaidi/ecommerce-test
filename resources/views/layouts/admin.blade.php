@@ -37,7 +37,7 @@
         href="{{asset('assets/admin')}}/{{get_style_derection()}}/core/colors/palette-gradient.css">
     <!-- END Page Level CSS-->
     <!-- BEGIN Custom CSS-->
-    {{-- <link rel="stylesheet" type="text/css" href="../../../assets/css/style-rtl.css"> --}}
+    <link rel="stylesheet" type="text/css" href="{{asset('assets')}}/css/style.css">
     <!-- END Custom CSS-->
     @stack('styles')
 </head>

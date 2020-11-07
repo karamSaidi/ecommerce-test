@@ -4,5 +4,16 @@ return [
     'save' => 'Save',
     'updated_success' => 'Record Updated Successfully',
 
+    'validate_number' => 'Thid feild must be number',
+    'validate_boolean' => 'Thid feild must be boolean',
+    'validate_string' => 'Thid feild must be string',
+    'validate_required' => 'Thid feild is required',
+    'validate_min' => 'Min Lenght is ',
+    'validate_max' => 'Max Lenght is ',
+    'validate_confirmed' => 'Confirmation not match',
+
+    'inactive' => 'Inactive',
+    'active' => 'Active',
+
 
 ];
