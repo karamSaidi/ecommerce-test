@@ -32,4 +32,16 @@ class ShippginRequest extends FormRequest
             'value' => 'required|string',
         ];
     }
+
+
+    public function messages()
+    {
+        return [
+            'id.exists' => __('admin/settings/shipping.exists'),
+            '*.number' => __('general.validate_number'),
+            '*.boolean' => __('general.validate_boolean'),
+            '*.string' => __('general.validate_string'),
+            '*.required' => __('general.validate_required'),
+        ];
+    }
 }
