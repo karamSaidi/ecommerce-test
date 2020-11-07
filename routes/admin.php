@@ -23,11 +23,15 @@ Route::group(
 
             // **********************  auth **********************
             Route::group(['middleware' => 'auth:admin'], function () {
+
                 Route::get('/logout', 'AuthController@logout')->name('logout');
                 Route::get('/profile', 'AuthController@profile')->name('profile');
+                Route::put('/profile/update', 'AuthController@profile_update')->name('profile.update');
+                Route::put('/password_change', 'AuthController@password_change')->name('password_change');
 
                 Route::get('/', 'DashboardController@index');
                 Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
+
 
 
                 /*************************** setting */

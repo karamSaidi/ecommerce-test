@@ -176,6 +176,9 @@ return [
         App\Providers\RouteServiceProvider::class,
 
         /************** custom ***************/
+        Intervention\Image\ImageServiceProvider::class,
+
+
 
     ],
 
@@ -230,7 +233,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
 
         /************** custom ***************/
-
+        'Image' => Intervention\Image\Facades\Image::class,
 
 
     ],

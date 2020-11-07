@@ -53,8 +53,12 @@
                                 <span class="user-name text-bold-700">{{auth()->user()->name}}</span>
                             </span>
                             <span class="avatar avatar-online">
-                                <img src="{{asset('assets/admin')}}/images/portrait/small/avatar-s-19.png"
-                                    alt="avatar"><i></i></span>
+                                @if(auth()->user()->avatar)
+                                <img src="{{auth()->user()->avatar_url}}" alt="avatar">
+                                @else
+                                <img src="{{asset('assets/admin')}}/images/portrait/small/avatar-s-19.png" alt="avatar">
+                                @endif
+                            </span>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right">
                             <a class="dropdown-item" href="{{route('admin.profile')}}">
