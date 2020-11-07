@@ -23,6 +23,9 @@ Route::group(
 
             // **********************  auth **********************
             Route::group(['middleware' => 'auth:admin'], function () {
+                Route::get('/logout', 'AuthController@logout')->name('logout');
+                Route::get('/profile', 'AuthController@profile')->name('profile');
+
                 Route::get('/', 'DashboardController@index');
                 Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
 

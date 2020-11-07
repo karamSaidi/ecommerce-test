@@ -27,5 +27,10 @@ return [
     'login_success' => 'Login successfully',
     'login_failed' => 'Login failed, check your email and password and try again',
 
+    'hello' => 'Hello',
+    'edit_profile' => 'Edit Profile',
+    'logout' => 'Logout',
+
+
 
 ];

@@ -28,5 +28,15 @@ class AuthController extends Controller
             ->with(['error' => __('auth.login_failed')]);
     } // ./do_login
 
+    public function logout()
+    {
+        auth()->logout();
+        return redirect()->route('admin.login');
+    } // ./logut
 
+
+    public function profile()
+    {
+        return view('admin.auth.profile');
+    }
 }// ./AuthController
