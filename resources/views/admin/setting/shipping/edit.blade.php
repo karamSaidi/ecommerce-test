@@ -49,8 +49,8 @@
                         <div class="form-group">
                             <label>{{__('admin/settings/shipping.name')}}</label>
                             <input type="text" value="{{old('value', $shipping->value)}}"
-                                class="form-control @error('value') is-invalid @enderror" placeholder="
-                                {{__('admin/settings/shipping.name')}}" name="value">
+                                class="form-control @error('value') is-invalid @enderror"
+                                placeholder="{{__('admin/settings/shipping.name')}}" name="value">
                             @error('value')
                             <span class="text-danger">{{$message}}</span>
                             @enderror
@@ -60,8 +60,8 @@
                         <div class="form-group">
                             <label>{{__('admin/settings/shipping.value')}}</label>
                             <input type="number" value="{{old('plain_value', $shipping->plain_value)}}"
-                                class="form-control @error('plain_value') is-invalid @enderror" placeholder="
-                                {{__('admin/settings/shipping.value')}}" name="plain_value">
+                                class="form-control @error('plain_value') is-invalid @enderror"
+                                placeholder="{{__('admin/settings/shipping.value')}}" name="plain_value">
                             @error('plain_value')
                             <span class="text-danger">{{$message}}</span>
                             @enderror
@@ -69,9 +69,9 @@
                     </div>
                 </div>
                 <fieldset class="checkbox">
-                    <label>
-                        <input type="checkbox" value="1" {{old('status', $shipping->status)? 'checked': ''}}
-                            name="status">
+                    <input type="checkbox" class="switchery" value="1"
+                        {{old('status', $shipping->status)? 'checked': ''}} name="status">
+                    <label class="ml-1">
                         {{__('admin/settings/shipping.enable_method')}}
                     </label>
                 </fieldset>

@@ -36,6 +36,13 @@
     <link rel="stylesheet" type="text/css"
         href="{{asset('assets/admin')}}/{{get_style_derection()}}/core/colors/palette-gradient.css">
     <!-- END Page Level CSS-->
+
+    <link rel="stylesheet" type="text/css"
+        href="{{asset('assets/admin')}}/vendors/css/forms/toggle/bootstrap-switch.min.css">
+    <link rel="stylesheet" type="text/css" href="{{asset('assets/admin')}}/vendors/css/forms/toggle/switchery.min.css">
+    <link rel="stylesheet" type="text/css" href="{{asset('assets/admin')}}/css-rtl/plugins/forms/switch.css">
+    <link rel="stylesheet" type="text/css" href="{{asset('assets/admin')}}/css-rtl/core/colors/palette-switch.css">
+
     <!-- BEGIN Custom CSS-->
     <link rel="stylesheet" type="text/css" href="{{asset('assets')}}/css/style.css">
     <!-- END Custom CSS-->
@@ -76,6 +83,13 @@
     <!-- END MODERN JS-->
     <!-- BEGIN PAGE LEVEL JS-->
     <!-- END PAGE LEVEL JS-->
+
+    <script src="{{asset('assets/admin')}}/vendors/js/forms/toggle/bootstrap-switch.min.js" type="text/javascript">
+    </script>
+    <script src="{{asset('assets/admin')}}/vendors/js/forms/toggle/bootstrap-checkbox.min.js" type="text/javascript">
+    </script>
+    <script src="{{asset('assets/admin')}}/vendors/js/forms/toggle/switchery.min.js" type="text/javascript"></script>
+    <script src="{{asset('assets/admin')}}/js/scripts/forms/switch.js" type="text/javascript"></script>
 
     @stack('scripts')
 </body>

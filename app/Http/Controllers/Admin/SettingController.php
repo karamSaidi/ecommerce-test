@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\ShippginRequest;
-use App\Models\Admin\Setting;
+use App\Models\Setting;
 use Illuminate\Support\Str;
 
 class SettingController extends Controller
