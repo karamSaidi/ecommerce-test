@@ -91,6 +91,17 @@
     <script src="{{asset('assets/admin')}}/vendors/js/forms/toggle/switchery.min.js" type="text/javascript"></script>
     <script src="{{asset('assets/admin')}}/js/scripts/forms/switch.js" type="text/javascript"></script>
 
+    <script>
+        $(document).ready(function() {
+            $('.form-delete').on('submit', function(e){
+                if(!confirm('{{__('general.confirm_delete')}}')){
+                    e.preventDefault();
+                }
+        
+            });
+        });
+       
+    </script>
     @stack('scripts')
 </body>
 

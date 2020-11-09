@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Admin\Auth;
+namespace App\Http\Requests\Admin;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class ProfileRequest extends FormRequest
+class CategoryRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,13 +23,12 @@ class ProfileRequest extends FormRequest
      */
     public function rules()
     {
-        // if (!$this->has('status'))
-        //     $this['status'] = '0';
+        if (!$this->has('status'))
+            $this['status'] = '0';
         return [
-            'email' => 'required|email|unique:admins,email,' . $this->id,
-            'name' => 'required|string|min:3|max:50',
-            // 'status' => 'nullable|boolean',
-            'avatar' => 'sometimes|image|mimes:png,jpg,jpeg'
+            'name' => 'required|min:3|max:200',
+            'status' => 'nullable|boolean',
+            'image' => 'sometimes|image|mimes:png,jpg,jpeg'
         ];
     }
 }

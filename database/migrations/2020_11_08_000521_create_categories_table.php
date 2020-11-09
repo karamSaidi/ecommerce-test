@@ -18,6 +18,7 @@ class CreateCategoriesTable extends Migration
             $table->foreignId('parent_id')->nullable()->constrained('categories', 'id')->cascadeOnDelete();
             $table->string('slug')->unique();
             $table->boolean('status')->default(1);
+            $table->string('image')->nullable();
             $table->timestamps();
         });
 
@@ -26,7 +27,6 @@ class CreateCategoriesTable extends Migration
             $table->foreignId('category_id')->constrained('categories', 'id')->cascadeOnDelete();
             $table->string('locale');
             $table->string('name');
-            $table->string('image')->nullable();
             $table->unique(['locale', 'category_id']);
         });
     }

@@ -2,8 +2,10 @@
 
 namespace Database\Seeders;
 
-use App\Models\Category;
+use Database\Factories\SubCategoryFactory;
+
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Storage;
 
 class CategorySeeder extends Seeder
 {
@@ -14,6 +16,13 @@ class CategorySeeder extends Seeder
      */
     public function run()
     {
-        Factory::call(Category::class, 25)->create();
+        // Get all files in a directory
+        $files =   Storage::disk('categories')->allFiles('');
+
+        // Delete Files
+        Storage::disk('categories')->delete($files);
+
+        \App\Models\Category::factory(15)->create();
+        \App\Models\Category::factory(35)->create();
     }
 }

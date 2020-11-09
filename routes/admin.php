@@ -40,6 +40,17 @@ Route::group(
                     Route::put('shipping/{id}', 'SettingController@update_shipping')->name('settings.shipping.update');
                 });
                 /*************************** ./setting */
+
+                /*************************** main-categories */
+                Route::group(['prefix' => 'main-categories'], function () {
+                    Route::get('/index', 'MainCategoriesController@index')->name('main_categories');
+                    Route::get('/create', 'MainCategoriesController@create')->name('main_categories.create');
+                    Route::post('/store', 'MainCategoriesController@store')->name('main_categories.store');
+                    Route::get('/edit/{id}', 'MainCategoriesController@edit')->name('main_categories.edit');
+                    Route::put('/update/{id}', 'MainCategoriesController@update')->name('main_categories.update');
+                    Route::delete('/destroy/{id}', 'MainCategoriesController@destroy')->name('main_categories.destroy');
+                });
+                /*************************** ./main-categories */
             });
             // **********************  ./ auth **********************
 

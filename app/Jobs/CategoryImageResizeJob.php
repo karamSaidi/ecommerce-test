@@ -8,7 +8,7 @@ use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 
-class AvatarResizeJob implements ShouldQueue
+class CategoryImageResizeJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
@@ -33,6 +33,6 @@ class AvatarResizeJob implements ShouldQueue
     public function handle()
     {
         $file_path = $save_to = config("filesystems.disks.$this->disk.root") . '/' . $this->path;
-        image_resize_from_storage($file_path, 150, null,  $save_to, 100);
+        image_resize_from_storage($file_path, 250, null,  $save_to, 100);
     }
 }

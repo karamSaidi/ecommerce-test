@@ -52,6 +52,33 @@
             </li>
             {{-- *********************** ./settings --}}
 
+            {{-- *********************** categories --}}
+            <li class="nab-item">
+                <a href="{{route('admin.main_categories')}}">
+                    <i class="la la-cog"></i>
+                    <span class="menu-title" data-i18n="nav.categories">{{__('admin/menu.main_categories')}}</span>
+                </a>
+                <ul class="menu-content">
+                    {{-- *********************** shipping --}}
+                    <li class="@if(request()->is('*admin/main-categories/index')) active @else nav-item @endif">
+                        <a href="{{route('admin.main_categories')}}">
+                            <i class="la la-list"></i>
+                            <span class="menu-title"
+                                data-i18n="nav.categories.list">{{__('admin/menu.main_categories_list')}}</span>
+                        </a>
+                    </li>
+                    <li class="@if(request()->is('*admin/main-categories/create')) active @else nav-item @endif">
+                        <a href="{{route('admin.main_categories.create')}}">
+                            <i class="la la-plus"></i>
+                            <span class="menu-title"
+                                data-i18n="nav.categories.create">{{__('admin/menu.main_categories_create')}}</span>
+                        </a>
+                    </li>
+                    {{-- *********************** ./shipping --}}
+                </ul>
+            </li>
+            {{-- *********************** ./categories --}}
+
 
 
 

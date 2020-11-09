@@ -30,9 +30,16 @@ class Category extends Model implements TranslatableContract
 
     public function getImageUrlAttribute()
     {
-        return $this->image ? asset('upload/main_categories/' . $this->image) : null;
+        return $this->image ? asset('upload/categories/' . $this->image) : null;
     } // ./getImageUrlAttribute
 
+
+    /***************************** Scope */
+    public function scopeParents($query)
+    {
+        return $query->WhereNull('parent_id');
+    }
+    /***************************** ./Scope */
 } // ./Category
 
 
