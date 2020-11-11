@@ -1,17 +1,18 @@
 <?php
 
-namespace App\Models\Admin;
+namespace App\Models;
 
 use Astrotomic\Translatable\Contracts\Translatable as TranslatableContract;
 use Astrotomic\Translatable\Translatable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use phpDocumentor\Reflection\Types\Self_;
+
 
 class Setting extends Model implements TranslatableContract
 {
     use HasFactory, Translatable;
 
+    protected $table = 'settings';
     public $fillable = ['key', 'is_translatable', 'plain_value', 'status'];
     protected $translatedAttributes = ['value'];
 

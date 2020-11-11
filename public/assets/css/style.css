@@ -1,3 +1,23 @@
 .avatar img {
     height: 35px;
 }
+
+.table th,
+.table td {
+    vertical-align: middle;
+    padding: 0.70rem;
+}
+
+table .img-thumbnail {
+    height: 70px !important;
+    width: 150px !important;
+}
+
+.table td.td-image {
+    padding: 0.5rem
+}
+
+table .btn-group .btn {
+    margin-right: 2px;
+    margin-left: 2px;
+}

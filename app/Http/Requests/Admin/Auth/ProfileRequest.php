@@ -24,7 +24,7 @@ class ProfileRequest extends FormRequest
     public function rules()
     {
         // if (!$this->has('status'))
-        //     $this->status = false;
+        //     $this['status'] = '0';
         return [
             'email' => 'required|email|unique:admins,email,' . $this->id,
             'name' => 'required|string|min:3|max:50',

@@ -12,7 +12,6 @@ class Admin extends Authenticatable
     use HasFactory, Notifiable;
 
     protected $table = 'admins';
-    public $timestamps = true;
     /**
      * The attributes that are mass assignable.
      *

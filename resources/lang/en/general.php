@@ -1,8 +1,12 @@
 <?php
 return [
     'error_happen' => 'Some thing wrong happens.. try again or call site support',
+    'not_found' => 'Record Not Found',
+    'confirm_delete' => 'Are you sure Delete this record',
     'save' => 'Save',
     'updated_success' => 'Record Updated Successfully',
+    'created_success' => 'Record Created Successfully',
+    'deleted_success' => 'Record deleted Successfully',
 
     'validate_number' => 'Thid feild must be number',
     'validate_boolean' => 'Thid feild must be boolean',
@@ -11,9 +15,23 @@ return [
     'validate_min' => 'Min Lenght is ',
     'validate_max' => 'Max Lenght is ',
     'validate_confirmed' => 'Confirmation not match',
+    'validate_image' => 'Not Image',
+    'validate_mimes' => 'MIMES not Allowed',
+
 
     'inactive' => 'Inactive',
     'active' => 'Active',
+
+    'name' => 'Name',
+    'slug' =>     'Slug',
+    'image' => 'Image',
+    'action' => 'Action',
+    'parent' => 'Parent',
+    'childs_count' => 'Childs count',
+
+    'showing' => 'Showing',
+    'to' => 'To',
+    'of' => 'Of',
 
 
 ];

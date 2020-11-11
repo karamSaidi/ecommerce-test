@@ -33,6 +33,6 @@ class AvatarResizeJob implements ShouldQueue
     public function handle()
     {
         $file_path = $save_to = config("filesystems.disks.$this->disk.root") . '/' . $this->path;
-        image_resize_from_storage($file_path, 300, null,  $save_to, 100);
+        image_resize_from_storage($file_path, 150, null,  $save_to, 100);
     }
 }
