@@ -13,5 +13,9 @@ return [
     'sub_categories_list' => 'Sub Categories List',
     'categories_create' => 'New Category',
 
+    'brands' => 'Brands',
+    'brands_list' => 'Brands List',
+    'brands_create' => 'New Brand',
+
 
 ];

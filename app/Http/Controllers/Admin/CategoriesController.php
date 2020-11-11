@@ -53,6 +53,7 @@ class CategoriesController extends Controller
             }
 
             Category::create($data);
+
             return redirect()->route('admin.main_categories')
                 ->with(['success' => __('general.created_success')]);
         } catch (\Exception $ex) {

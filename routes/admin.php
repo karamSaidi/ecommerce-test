@@ -52,6 +52,17 @@ Route::group(
                     Route::delete('/destroy/{id}', 'CategoriesController@destroy')->name('main_categories.destroy');
                 });
                 /*************************** ./main-categories */
+
+                /*************************** brands */
+                Route::group(['prefix' => 'brands'], function () {
+                    Route::get('/index', 'BrandsController@index')->name('brands');
+                    Route::get('/create', 'BrandsController@create')->name('brands.create');
+                    Route::post('/store', 'BrandsController@store')->name('brands.store');
+                    Route::get('/edit/{id}', 'BrandsController@edit')->name('brands.edit');
+                    Route::put('/update/{id}', 'BrandsController@update')->name('brands.update');
+                    Route::delete('/destroy/{id}', 'BrandsController@destroy')->name('brands.destroy');
+                });
+                /*************************** ./brands */
             });
             // **********************  ./ auth **********************
 
