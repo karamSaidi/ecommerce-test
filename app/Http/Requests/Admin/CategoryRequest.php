@@ -28,7 +28,19 @@ class CategoryRequest extends FormRequest
         return [
             'name' => 'required|min:3|max:200',
             'status' => 'nullable|boolean',
-            'image' => 'sometimes|image|mimes:png,jpg,jpeg'
+            'image' => 'sometimes|image|mimes:png,jpg,jpeg',
+            'parent_id' => 'nullable|numeric|exists:categories,id'
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            '*.required' => __('general.validate_required'),
+            '*.min' => __('general.validate_min') . '7',
+            '*.max' => __('general.validate_max') . '30',
+            '*.image' => __('general.validate_image'),
+            '*.mimes' => __('general.validate_mimes'),
         ];
     }
 }

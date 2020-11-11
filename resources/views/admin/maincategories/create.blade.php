@@ -17,7 +17,7 @@
                     <a href="{{route('admin.main_categories')}}">{{__('admin/menu.main_categories_list')}}</a>
                 </li>
                 <li class="breadcrumb-item active">
-                    {{__('admin/menu.main_categories_create')}}
+                    {{__('admin/menu.categories_create')}}
                 </li>
             </ol>
         </div>
@@ -39,9 +39,27 @@
             <div class="form-body">
                 <h4 class="form-section">
                     <i class="la la-plus"></i>
-                    {{__('admin/menu.main_categories_create')}}
+                    {{__('admin/menu.categories_create')}}
                 </h4>
                 <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="">{{__('general.parent')}}</label>
+                            <select class="form-control select2 @error('parent_id') is-invalid @enderror"
+                                name="parent_id">
+                                <option value="">{{__('admin/menu.main_categories')}}</option>
+                                @foreach ($categories as $category)
+                                <option value="{{$category->id}}" @if(old('parent_id')==$category->id) selected @endif>
+                                    {{$category->name}}</option>
+                                @endforeach
+                            </select>
+                            @error('parent_id')
+                            <span class="text-danger">{{$message}}</span>
+                            @enderror
+                        </div>
+                    </div>
+                </div>
+                <div class=" row">
                     <div class="col-md-6">
                         <div class="form-group">
                             <label>{{__('admin/categories.name')}}</label>

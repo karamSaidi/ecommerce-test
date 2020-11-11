@@ -15,7 +15,8 @@ return [
     'validate_min' => 'Min Lenght is ',
     'validate_max' => 'Max Lenght is ',
     'validate_confirmed' => 'Confirmation not match',
-
+    'validate_image' => 'Not Image',
+    'validate_mimes' => 'MIMES not Allowed',
 
 
     'inactive' => 'Inactive',
@@ -25,6 +26,8 @@ return [
     'slug' =>     'Slug',
     'image' => 'Image',
     'action' => 'Action',
+    'parent' => 'Parent',
+    'childs_count' => 'Childs count',
 
     'showing' => 'Showing',
     'to' => 'To',

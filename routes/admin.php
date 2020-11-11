@@ -43,12 +43,13 @@ Route::group(
 
                 /*************************** main-categories */
                 Route::group(['prefix' => 'main-categories'], function () {
-                    Route::get('/index', 'MainCategoriesController@index')->name('main_categories');
-                    Route::get('/create', 'MainCategoriesController@create')->name('main_categories.create');
-                    Route::post('/store', 'MainCategoriesController@store')->name('main_categories.store');
-                    Route::get('/edit/{id}', 'MainCategoriesController@edit')->name('main_categories.edit');
-                    Route::put('/update/{id}', 'MainCategoriesController@update')->name('main_categories.update');
-                    Route::delete('/destroy/{id}', 'MainCategoriesController@destroy')->name('main_categories.destroy');
+                    Route::get('/index', 'CategoriesController@index')->name('main_categories');
+                    Route::get('/sub', 'CategoriesController@index')->name('main_categories.sub');
+                    Route::get('/create', 'CategoriesController@create')->name('main_categories.create');
+                    Route::post('/store', 'CategoriesController@store')->name('main_categories.store');
+                    Route::get('/edit/{id}', 'CategoriesController@edit')->name('main_categories.edit');
+                    Route::put('/update/{id}', 'CategoriesController@update')->name('main_categories.update');
+                    Route::delete('/destroy/{id}', 'CategoriesController@destroy')->name('main_categories.destroy');
                 });
                 /*************************** ./main-categories */
             });

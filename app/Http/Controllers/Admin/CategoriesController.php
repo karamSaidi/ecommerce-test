@@ -6,10 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\CategoryRequest;
 use App\Jobs\CategoryImageResizeJob;
 use App\Models\Category;
-use Illuminate\Http\Request;
-use Illuminate\Support\Str;
 
-class MainCategoriesController extends Controller
+class CategoriesController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,7 +16,11 @@ class MainCategoriesController extends Controller
      */
     public function index()
     {
-        $categories = Category::parents()->latest('id')->paginate(config('general.paginate_number'));
+        $categories = [];
+        if (request()->is('*/admin/main-categories/sub'))
+            $categories = Category::sub()->latest('id')->with('parent')->paginate(config('general.paginate_number'));
+        else
+            $categories = Category::parents()->withCount('childs')->latest('id')->paginate(config('general.paginate_number'));
         return view('admin.maincategories.index', compact('categories'));
     }
 
@@ -29,7 +31,8 @@ class MainCategoriesController extends Controller
      */
     public function create()
     {
-        return view('admin.maincategories.create');
+        $categories = Category::parents()->select('id')->get();
+        return view('admin.maincategories.create', compact('categories'));
     }
 
     /**
@@ -41,14 +44,14 @@ class MainCategoriesController extends Controller
     public function store(CategoryRequest $request)
     {
         try {
-            $data = $request->only('name', 'status');
+            $data = $request->except('image');
             if ($request->has('image')) {
 
                 $data['image'] = upload_file($request->image, 'categories')['file_path'];
                 // resize image in background
                 dispatch(new CategoryImageResizeJob('categories', $data['image']));
             }
-            $data['slug'] = Str::slug($data['name']);
+
             Category::create($data);
             return redirect()->route('admin.main_categories')
                 ->with(['success' => __('general.created_success')]);
@@ -79,12 +82,13 @@ class MainCategoriesController extends Controller
     public function edit($id)
     {
         try {
+            $categories = Category::parents()->select('id')->get();
             $category = Category::where('id', $id)->first();
             if (!$category)
                 return redirect()->route('admin.main_categories')
                     ->with(['error' => __('general.not_found')]);
 
-            return view('admin.maincategories.edit', compact('category'));
+            return view('admin.maincategories.edit', compact('category', 'categories'));
         } catch (\Exception $ex) {
             dd($ex);
             return redirect()->route('admin.main_categories')
@@ -107,7 +111,8 @@ class MainCategoriesController extends Controller
                 return redirect()->route('admin.main_categories')
                     ->with(['error' => __('general.not_found')]);
 
-            $data = $request->only('name', 'status');
+            $data = $request->except('image');
+
             if ($request->has('image')) {
                 // delete old image
                 if ($category->image)
@@ -117,7 +122,6 @@ class MainCategoriesController extends Controller
                 // resize image in background
                 dispatch(new CategoryImageResizeJob('categories', $data['image']));
             }
-            $data['slug'] = Str::slug($data['name']);
             $category->update($data);
             return redirect()->route('admin.main_categories')
                 ->with(['success' => __('general.updated_success')]);

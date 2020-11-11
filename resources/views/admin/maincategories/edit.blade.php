@@ -39,13 +39,32 @@
             <input type="hidden" name="id" value="{{$category->id}}">
             <div class="form-body">
                 <h4 class="form-section">
-                    <i class="la la-plus"></i>
+                    <i class="la la-edit"></i>
                     {{__('admin/categories.edit')}}
                     <small>{{$category->slug}}</small>
                     @error('id')
                     <span class="text-danger">{{$message}}</span>
                     @enderror
                 </h4>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="">{{__('general.parent')}}</label>
+                            <select class="form-control select2 @error('parent_id') is-invalid @enderror"
+                                name="parent_id">
+                                <option value="">{{__('admin/menu.main_categories')}}</option>
+                                @foreach ($categories as $cat)
+                                <option value="{{$cat->id}}" @if(old('parent_id', $category->parent_id)== $cat->id)
+                                    selected @endif>
+                                    {{$cat->name}}</option>
+                                @endforeach
+                            </select>
+                            @error('parent_id')
+                            <span class="text-danger">{{$message}}</span>
+                            @enderror
+                        </div>
+                    </div>
+                </div>
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">

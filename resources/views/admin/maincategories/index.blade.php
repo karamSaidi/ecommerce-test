@@ -34,7 +34,7 @@
 
             <a href="{{route('admin.main_categories.create')}}" class="btn btn-outline-primary btn-sm float-lg-right">
                 <i class="la la-plus"></i>
-                <span>{{__('admin/menu.main_categories_create')}}</span>
+                <span>{{__('admin/menu.categories_create')}}</span>
             </a>
         </h4>
 
@@ -42,7 +42,7 @@
     <div class="card-content collapse show">
         <div class="card-body card-dashboard">
             <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap4">
-                <div class="row">
+                {{-- <div class="row">
                     <div class="col-sm-12 col-md-6">
                         <div class="dataTables_length" id="DataTables_Table_0_length"><label>Show <select
                                     name="DataTables_Table_0_length" aria-controls="DataTables_Table_0"
@@ -58,7 +58,7 @@
                                     class="form-control form-control-sm" placeholder=""
                                     aria-controls="DataTables_Table_0"></label></div>
                     </div>
-                </div>
+                </div> --}}
                 <div class="row">
                     <div class="col-sm-12">
                         <table class="table table-striped table-bordered zero-configuration dataTable"
@@ -67,6 +67,11 @@
                                 <tr role="row">
                                     <th>{{__('general.name')}}</th>
                                     <th>{{__('general.slug')}}</th>
+                                    @if(request()->is('*/admin/main-categories/sub'))
+                                    <th>{{__('general.parent')}}</th>
+                                    @else
+                                    <th>{{__('general.childs_count')}}</th>
+                                    @endif
                                     <th>{{__('general.image')}}</th>
                                     <th>{{__('general.action')}}</th>
                                 </tr>
@@ -76,6 +81,11 @@
                                 <tr role="row" class="odd">
                                     <td>{{$category->name}}</td>
                                     <td>{{$category->slug}}</td>
+                                    @if(request()->is('*/admin/main-categories/sub'))
+                                    <td>{{$category->parent->name}}</td>
+                                    @else
+                                    <td>{{$category->childs_count}}</td>
+                                    @endif
                                     <td class="td-image"><img src="{{$category->image_url}}" alt="{{$category->name}}"
                                             class="img-thumbnail img-fluid"></td>
                                     <td>
@@ -117,7 +127,7 @@
                     </div>
                     <div class="col-sm-12 col-md-7">
                         <div class="dataTables_paginate paging_simple_numbers" id="DataTables_Table_0_paginate">
-                            {{$categories->links()}}
+                            {{$categories->appends(request()->input())->links()}}
                         </div>
                     </div>
                 </div>

@@ -23,6 +23,9 @@
     <!-- BEGIN VENDOR CSS-->
     <link rel="stylesheet" type="text/css" href="{{asset('assets/admin')}}/{{get_style_derection()}}/vendors.css">
     <link rel="stylesheet" type="text/css" href="{{asset('assets/admin')}}/vendors/css/ui/prism.min.css">
+    <link rel="stylesheet" type="text/css"
+        href="{{asset('assets/admin')}}/vendors/css/tables/datatable/datatables.min.css">
+    <link rel="stylesheet" type="text/css" href="{{asset('assets/admin')}}/vendors/css/forms/selects/select2.min.css">
     <!-- END VENDOR CSS-->
     <!-- BEGIN MODERN CSS-->
     <link rel="stylesheet" type="text/css" href="{{asset('assets/admin')}}/{{get_style_derection()}}/app.css">
@@ -75,6 +78,9 @@
     <!-- BEGIN VENDOR JS-->
     <!-- BEGIN PAGE VENDOR JS-->
     <script type="text/javascript" src="{{asset('assets/admin')}}/vendors/js/ui/prism.min.js"></script>
+    <script src="{{asset('assets/admin')}}/vendors/js/tables/datatable/datatables.min.js" type="text/javascript">
+    </script>
+    <script src="{{asset('assets/admin')}}/vendors/js/forms/select/select2.full.min.js" type="text/javascript"></script>
     <!-- END PAGE VENDOR JS-->
     <!-- BEGIN MODERN JS-->
     <script src="{{asset('assets/admin')}}/js/core/app-menu.js" type="text/javascript"></script>
@@ -83,13 +89,17 @@
     <!-- END MODERN JS-->
     <!-- BEGIN PAGE LEVEL JS-->
     <!-- END PAGE LEVEL JS-->
+    <script src="{{asset('assets/admin')}}/js/scripts/tables/datatables/datatable-basic.js" type="text/javascript">
 
+    </script>
     <script src="{{asset('assets/admin')}}/vendors/js/forms/toggle/bootstrap-switch.min.js" type="text/javascript">
     </script>
     <script src="{{asset('assets/admin')}}/vendors/js/forms/toggle/bootstrap-checkbox.min.js" type="text/javascript">
     </script>
     <script src="{{asset('assets/admin')}}/vendors/js/forms/toggle/switchery.min.js" type="text/javascript"></script>
     <script src="{{asset('assets/admin')}}/js/scripts/forms/switch.js" type="text/javascript"></script>
+    <script src="{{asset('assets/admin')}}/js/scripts/forms/select/form-select2.js" type="text/javascript"></script>
+
 
     <script>
         $(document).ready(function() {
@@ -97,10 +107,10 @@
                 if(!confirm('{{__('general.confirm_delete')}}')){
                     e.preventDefault();
                 }
-        
+
             });
         });
-       
+
     </script>
     @stack('scripts')
 </body>

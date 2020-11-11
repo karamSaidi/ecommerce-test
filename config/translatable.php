@@ -12,6 +12,7 @@ return [
     */
     'locales' => [
         'en',
+        'ar',
         'fr',
         'es' => [
             'MX', // mexican spanish
@@ -56,7 +57,7 @@ return [
     | $useTranslationFallback when defined
     |
     */
-    'use_fallback' => false,
+    'use_fallback' => true,
 
     /*
     |--------------------------------------------------------------------------
