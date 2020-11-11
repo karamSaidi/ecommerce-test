@@ -3,11 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\CategoryRequest;
-use App\Jobs\CategoryImageResizeJob;
-use App\Models\Category;
+use App\Http\Requests\Admin\BrandRequest;
+use App\Jobs\BrandImageResizeJob;
+use App\Models\Brand;
 
-class CategoriesController extends Controller
+class BrandsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,12 +16,9 @@ class CategoriesController extends Controller
      */
     public function index()
     {
-        $categories = [];
-        if (request()->is('*/admin/main-categories/sub'))
-            $categories = Category::sub()->latest('id')->with('parent')->paginate(config('general.paginate_number'));
-        else
-            $categories = Category::parents()->withCount('childs')->latest('id')->paginate(config('general.paginate_number'));
-        return view('admin.maincategories.index', compact('categories'));
+
+        $brands = Brand::latest('id')->paginate(config('general.paginate_number'));
+        return view('admin.brands.index', compact('brands'));
     }
 
     /**
@@ -31,8 +28,7 @@ class CategoriesController extends Controller
      */
     public function create()
     {
-        $categories = Category::parents()->select('id')->get();
-        return view('admin.maincategories.create', compact('categories'));
+        return view('admin.brands.create');
     }
 
     /**
@@ -41,24 +37,24 @@ class CategoriesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(CategoryRequest $request)
+    public function store(BrandRequest $request)
     {
         try {
             $data = $request->except('image');
             if ($request->has('image')) {
 
-                $data['image'] = upload_file($request->image, 'categories')['file_path'];
+                $data['image'] = upload_file($request->image, 'brands')['file_path'];
                 // resize image in background
-                dispatch(new CategoryImageResizeJob('categories', $data['image']));
+                dispatch(new BrandImageResizeJob('brands', $data['image']));
             }
 
-            Category::create($data);
+            Brand::create($data);
 
-            return redirect()->route('admin.main_categories')
+            return redirect()->route('admin.brands')
                 ->with(['success' => __('general.created_success')]);
         } catch (\Exception $ex) {
             dd($ex);
-            return redirect()->route('admin.main_categories')
+            return redirect()->route('admin.brands')
                 ->with(['error' => __('general.error_happen')]);
         }
     }
@@ -83,16 +79,15 @@ class CategoriesController extends Controller
     public function edit($id)
     {
         try {
-            $categories = Category::parents()->select('id')->get();
-            $category = Category::where('id', $id)->first();
-            if (!$category)
-                return redirect()->route('admin.main_categories')
+            $brand = Brand::where('id', $id)->first();
+            if (!$brand)
+                return redirect()->route('admin.brands')
                     ->with(['error' => __('general.not_found')]);
 
-            return view('admin.maincategories.edit', compact('category', 'categories'));
+            return view('admin.brands.edit', compact('brand'));
         } catch (\Exception $ex) {
             dd($ex);
-            return redirect()->route('admin.main_categories')
+            return redirect()->route('admin.brands')
                 ->with(['error' => __('general.error_happen')]);
         }
     }
@@ -104,31 +99,31 @@ class CategoriesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(CategoryRequest $request, $id)
+    public function update(BrandRequest $request, $id)
     {
         try {
-            $category = Category::where('id', $id)->first();
-            if (!$category)
-                return redirect()->route('admin.main_categories')
+            $brand = Brand::where('id', $id)->first();
+            if (!$brand)
+                return redirect()->route('admin.brands')
                     ->with(['error' => __('general.not_found')]);
 
             $data = $request->except('image');
 
             if ($request->has('image')) {
                 // delete old image
-                if ($category->image)
-                    delete_storage_file('categories', $category->image);
+                if ($brand->image)
+                    delete_storage_file('brands', $brand->image);
 
-                $data['image'] = upload_file($request->image, 'categories')['file_path'];
+                $data['image'] = upload_file($request->image, 'brands')['file_path'];
                 // resize image in background
-                dispatch(new CategoryImageResizeJob('categories', $data['image']));
+                dispatch(new BrandImageResizeJob('brands', $data['image']));
             }
-            $category->update($data);
-            return redirect()->route('admin.main_categories')
+            $brand->update($data);
+            return redirect()->route('admin.brands')
                 ->with(['success' => __('general.updated_success')]);
         } catch (\Exception $ex) {
             dd($ex);
-            return redirect()->route('admin.main_categories')
+            return redirect()->route('admin.brands')
                 ->with(['error' => __('general.error_happen')]);
         }
     }
@@ -142,22 +137,22 @@ class CategoriesController extends Controller
     public function destroy($id)
     {
         try {
-            $category = Category::where('id', $id)->first();
-            if (!$category)
-                return redirect()->route('admin.main_categories')
+            $brand = Brand::where('id', $id)->first();
+            if (!$brand)
+                return redirect()->route('admin.brands')
                     ->with(['error' => __('general.not_found')]);
 
-            if ($category->image) {
+            if ($brand->image) {
                 // delete old image
-                if ($category->image)
-                    delete_storage_file('categories', $category->image);
+                if ($brand->image)
+                    delete_storage_file('brands', $brand->image);
             }
-            $category->delete();
+            $brand->delete();
             return redirect()->back()
                 ->with(['success' => __('general.deleted_success')]);
         } catch (\Exception $ex) {
             dd($ex);
-            return redirect()->route('admin.main_categories')
+            return redirect()->route('admin.brands')
                 ->with(['error' => __('general.error_happen')]);
         }
     }

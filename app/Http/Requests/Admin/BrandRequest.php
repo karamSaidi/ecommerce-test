@@ -4,7 +4,7 @@ namespace App\Http\Requests\Admin;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CategoryRequest extends FormRequest
+class BrandRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -28,8 +28,7 @@ class CategoryRequest extends FormRequest
         return [
             'name' => 'required|min:3|max:200',
             'status' => 'nullable|boolean',
-            'image' => 'sometimes|image|mimes:png,jpg,jpeg',
-            'parent_id' => 'nullable|numeric|exists:categories,id'
+            'image' => 'required_without:id|image|mimes:png,jpg,jpeg',
         ];
     }
 
@@ -37,6 +36,7 @@ class CategoryRequest extends FormRequest
     {
         return [
             '*.required' => __('general.validate_required'),
+            '*.required_without' => __('general.validate_required'),
             '*.min' => __('general.validate_min') . '3',
             '*.max' => __('general.validate_max') . '30',
             '*.image' => __('general.validate_image'),
