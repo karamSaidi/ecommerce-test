@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\Brand;
+use App\Models\Tag;
 use Faker\Factory;
 use Illuminate\Database\Seeder;
 
@@ -37,7 +37,7 @@ class TagSeeder extends Seeder
                 'ar' => ['name' => $name_ar],
             ];
 
-            Brand::create($data);
+            Tag::create($data);
         }
     }
 }

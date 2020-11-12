@@ -23,13 +23,17 @@ class BrandSeeder extends Seeder
 
     private function fakeData($count)
     {
+        // Get all files in a directory
+        $files =   Storage::disk('brands')->allFiles('');
+
+        // Delete Files
+        Storage::disk('brands')->delete($files);
 
         $faker_ar = Factory::create('ar_SA');
         $faker_en = Factory::create('en_US');
         // $faker_fr = Factory::create('fr_FR');
 
-        $categories_id = collect(Category::select('id')->get()->modelKeys());
-
+        $tmp_images = collect(Storage::disk('public')->files('background'));
 
 
         for ($i = 0; $i < $count; $i++) {
@@ -38,7 +42,6 @@ class BrandSeeder extends Seeder
 
             $slug = Str::slug($name_en);
 
-            $tmp_images = collect(Storage::disk('public')->files('background'));
             $temp = $tmp_images->random();
             $image = "$slug.jpg";
             Storage::disk('brands')->put($image, Storage::disk('public')->get($temp));

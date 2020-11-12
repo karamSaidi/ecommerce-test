@@ -39,7 +39,7 @@ class CategorySeeder extends Seeder
 
         $categories_id = collect(Category::select('id')->get()->modelKeys());
 
-
+        $tmp_images = collect(Storage::disk('public')->files('background'));
 
 
         for ($i = 0; $i < $count; $i++) {
@@ -48,7 +48,7 @@ class CategorySeeder extends Seeder
 
             $slug = Str::slug($name_en);
 
-            $tmp_images = collect(Storage::disk('public')->files('background'));
+
             $temp = $tmp_images->random();
             $image = "$slug.jpg";
             Storage::disk('categories')->put($image, Storage::disk('public')->get($temp));

@@ -17,5 +17,9 @@ return [
     'brands_list' => 'Brands List',
     'brands_create' => 'New Brand',
 
+    'tags' => 'Tags',
+    'tags_list' => 'Tags List',
+    'tags_create' => 'New Tag',
+
 
 ];

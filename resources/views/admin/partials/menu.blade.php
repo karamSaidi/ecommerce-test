@@ -88,7 +88,7 @@
 
             {{-- *********************** brands --}}
             <li class="nab-item">
-                <a href="{{route('admin.main_categories')}}">
+                <a href="{{route('admin.brands')}}">
                     <i class="la la-cog"></i>
                     <span class="menu-title" data-i18n="nav.brands">{{__('admin/menu.brands')}}</span>
                 </a>
@@ -112,6 +112,32 @@
                 </ul>
             </li>
             {{-- *********************** ./brands --}}
+
+            {{-- *********************** tags --}}
+            <li class="nab-item">
+                <a href="{{route('admin.tags')}}">
+                    <i class="la la-cog"></i>
+                    <span class="menu-title" data-i18n="nav.tags">{{__('admin/menu.tags')}}</span>
+                </a>
+                <ul class="menu-content">
+
+                    <li class="@if(request()->is('*admin/tags/index')) active @else nav-item @endif">
+                        <a href="{{route('admin.tags')}}">
+                            <i class="la la-list"></i>
+                            <span class="menu-title" data-i18n="nav.tags.list">{{__('admin/menu.tags_list')}}</span>
+                        </a>
+                    </li>
+
+                    <li class="@if(request()->is('*admin/tags/create')) active @else nav-item @endif">
+                        <a href="{{route('admin.tags.create')}}">
+                            <i class="la la-plus"></i>
+                            <span class="menu-title" data-i18n="nav.tags.create">{{__('admin/menu.tags_create')}}</span>
+                        </a>
+                    </li>
+
+                </ul>
+            </li>
+            {{-- *********************** ./tags --}}
 
 
 
