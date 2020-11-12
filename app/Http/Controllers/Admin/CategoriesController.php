@@ -16,12 +16,9 @@ class CategoriesController extends Controller
      */
     public function index()
     {
-        $categories = [];
-        if (request()->is('*/admin/main-categories/sub'))
-            $categories = Category::sub()->latest('id')->with('parent')->paginate(config('general.paginate_number'));
-        else
-            $categories = Category::parents()->withCount('childs')->latest('id')->paginate(config('general.paginate_number'));
-        return view('admin.maincategories.index', compact('categories'));
+        $categories = Category::latest('id')->with('parent')->withCount('childs')->paginate(config('general.paginate_number'));
+
+        return view('admin.categories.index', compact('categories'));
     }
 
     /**
@@ -32,7 +29,7 @@ class CategoriesController extends Controller
     public function create()
     {
         $categories = Category::parents()->select('id')->get();
-        return view('admin.maincategories.create', compact('categories'));
+        return view('admin.categories.create', compact('categories'));
     }
 
     /**
@@ -54,11 +51,11 @@ class CategoriesController extends Controller
 
             Category::create($data);
 
-            return redirect()->route('admin.main_categories')
+            return redirect()->route('admin.categories')
                 ->with(['success' => __('general.created_success')]);
         } catch (\Exception $ex) {
             dd($ex);
-            return redirect()->route('admin.main_categories')
+            return redirect()->route('admin.categories')
                 ->with(['error' => __('general.error_happen')]);
         }
     }
@@ -86,13 +83,13 @@ class CategoriesController extends Controller
             $categories = Category::parents()->select('id')->get();
             $category = Category::where('id', $id)->first();
             if (!$category)
-                return redirect()->route('admin.main_categories')
+                return redirect()->route('admin.categories')
                     ->with(['error' => __('general.not_found')]);
 
-            return view('admin.maincategories.edit', compact('category', 'categories'));
+            return view('admin.categories.edit', compact('category', 'categories'));
         } catch (\Exception $ex) {
             dd($ex);
-            return redirect()->route('admin.main_categories')
+            return redirect()->route('admin.categories')
                 ->with(['error' => __('general.error_happen')]);
         }
     }
@@ -109,7 +106,7 @@ class CategoriesController extends Controller
         try {
             $category = Category::where('id', $id)->first();
             if (!$category)
-                return redirect()->route('admin.main_categories')
+                return redirect()->route('admin.categories')
                     ->with(['error' => __('general.not_found')]);
 
             $data = $request->except('image');
@@ -124,11 +121,11 @@ class CategoriesController extends Controller
                 dispatch(new CategoryImageResizeJob('categories', $data['image']));
             }
             $category->update($data);
-            return redirect()->route('admin.main_categories')
+            return redirect()->route('admin.categories')
                 ->with(['success' => __('general.updated_success')]);
         } catch (\Exception $ex) {
             dd($ex);
-            return redirect()->route('admin.main_categories')
+            return redirect()->route('admin.categories')
                 ->with(['error' => __('general.error_happen')]);
         }
     }
@@ -144,7 +141,7 @@ class CategoriesController extends Controller
         try {
             $category = Category::where('id', $id)->first();
             if (!$category)
-                return redirect()->route('admin.main_categories')
+                return redirect()->route('admin.categories')
                     ->with(['error' => __('general.not_found')]);
 
             if ($category->image) {
@@ -157,7 +154,7 @@ class CategoriesController extends Controller
                 ->with(['success' => __('general.deleted_success')]);
         } catch (\Exception $ex) {
             dd($ex);
-            return redirect()->route('admin.main_categories')
+            return redirect()->route('admin.categories')
                 ->with(['error' => __('general.error_happen')]);
         }
     }

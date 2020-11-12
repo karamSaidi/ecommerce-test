@@ -14,7 +14,7 @@
                     <a href="{{route('admin.dashboard')}}">{{__('admin/menu.dashboard')}}</a>
                 </li>
                 <li class="breadcrumb-item active">
-                    {{__('admin/menu.main_categories_list')}}
+                    {{__('admin/menu.categories_list')}}
                 </li>
             </ol>
         </div>
@@ -30,9 +30,9 @@
     <div class="card-header">
         <h4 class="card-title">
             <i class="la la-list"></i>
-            {{__('admin/menu.main_categories_list')}}
+            {{__('admin/menu.categories_list')}}
 
-            <a href="{{route('admin.main_categories.create')}}" class="btn btn-outline-primary btn-sm float-lg-right">
+            <a href="{{route('admin.categories.create')}}" class="btn btn-outline-primary btn-sm float-lg-right">
                 <i class="la la-plus"></i>
                 <span>{{__('admin/menu.categories_create')}}</span>
             </a>
@@ -67,11 +67,8 @@
                                 <tr role="row">
                                     <th>{{__('general.name')}}</th>
                                     <th>{{__('general.slug')}}</th>
-                                    @if(request()->is('*/admin/main-categories/sub'))
                                     <th>{{__('general.parent')}}</th>
-                                    @else
                                     <th>{{__('general.childs_count')}}</th>
-                                    @endif
                                     <th>{{__('general.image')}}</th>
                                     <th>{{__('general.action')}}</th>
                                 </tr>
@@ -81,21 +78,18 @@
                                 <tr role="row" class="odd">
                                     <td>{{$category->name}}</td>
                                     <td>{{$category->slug}}</td>
-                                    @if(request()->is('*/admin/main-categories/sub'))
-                                    <td>{{$category->parent->name}}</td>
-                                    @else
+                                    <td>{{$category->parent? $category->parent->name : '' }}</td>
                                     <td>{{$category->childs_count}}</td>
-                                    @endif
                                     <td class="td-image"><img src="{{$category->image_url}}" alt="{{$category->name}}"
                                             class="img-thumbnail img-fluid"></td>
                                     <td>
                                         <div class="btn-group">
 
-                                            <a href="{{route('admin.main_categories.edit', $category->id)}}"
+                                            <a href="{{route('admin.categories.edit', $category->id)}}"
                                                 class="btn btn-outline-info btn-sm">
                                                 <i class="la la-edit"></i>
                                             </a>
-                                            <form action="{{route('admin.main_categories.destroy', $category->id)}}"
+                                            <form action="{{route('admin.categories.destroy', $category->id)}}"
                                                 method="post" class="form-delete">
                                                 @csrf
                                                 @method('delete')
