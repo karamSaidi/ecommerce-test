@@ -14,10 +14,10 @@
                     <a href="{{route('admin.dashboard')}}">{{__('admin/menu.dashboard')}}</a>
                 </li>
                 <li class="breadcrumb-item">
-                    <a href="{{route('admin.main_categories')}}">{{__('admin/menu.main_categories_list')}}</a>
+                    <a href="{{route('admin.categories')}}">{{__('admin/menu.categories_list')}}</a>
                 </li>
                 <li class="breadcrumb-item active">
-                    {{__('admin/categories.edit')}}
+                    {{__('admin/menu.categories_create')}}
                 </li>
             </ol>
         </div>
@@ -32,19 +32,13 @@
 <div class="card">
 
     <div class="card-body">
-        <form class="form" method="post" action="{{route('admin.main_categories.update', $category->id)}}"
-            enctype="multipart/form-data">
+        <form class="form" method="post" action="{{route('admin.categories.store')}}" enctype="multipart/form-data">
             @csrf()
-            @method('put')
-            <input type="hidden" name="id" value="{{$category->id}}">
+
             <div class="form-body">
                 <h4 class="form-section">
-                    <i class="la la-edit"></i>
-                    {{__('admin/categories.edit')}}
-                    <small>{{$category->slug}}</small>
-                    @error('id')
-                    <span class="text-danger">{{$message}}</span>
-                    @enderror
+                    <i class="la la-plus"></i>
+                    {{__('admin/menu.categories_create')}}
                 </h4>
                 <div class="row">
                     <div class="col-md-6">
@@ -54,9 +48,13 @@
                                 name="parent_id">
                                 <option value="">{{__('admin/menu.main_categories')}}</option>
                                 @foreach ($categories as $cat)
-                                <option value="{{$cat->id}}" @if(old('parent_id', $category->parent_id)== $cat->id)
-                                    selected @endif>
-                                    {{$cat->name}}</option>
+                                <option value="{{$cat->id}}" @if(old('parent_id')==$cat->id) selected @endif>
+                                    {{$cat->name}}
+                                </option>
+                                @if($cat->childs->count() > 0)
+                                @include('admin.categories.partial.category_child_option', [
+                                'childs' =>$cat->childs, 'sperator' => 1, 'parent_id' => null])
+                                @endif
                                 @endforeach
                             </select>
                             @error('parent_id')
@@ -65,11 +63,11 @@
                         </div>
                     </div>
                 </div>
-                <div class="row">
+                <div class=" row">
                     <div class="col-md-6">
                         <div class="form-group">
                             <label>{{__('admin/categories.name')}}</label>
-                            <input type="text" value="{{old('name', $category->name)}}"
+                            <input type="text" value="{{old('name')}}"
                                 class="form-control @error('name') is-invalid @enderror"
                                 placeholder="{{__('admin/categories.enter_name')}}" name="name">
                             @error('name')
@@ -91,21 +89,15 @@
                 <div class="row">
                     <div class="col-md-6">
                         <fieldset class="checkbox">
-                            <input type="checkbox" class="switchery" value="1"
-                                {{old('status', $category->status)? 'checked': ''}} name="status">
+                            <input type="checkbox" class="switchery" value="1" {{old('status')? 'checked': ''}}
+                                name="status">
                             <label class="ml-1">
                                 {{__('admin/categories.status')}}
                             </label>
                         </fieldset>
                     </div>
                     <div class="col-md-6">
-                        @if($category->image)
-                        <img src="{{$category->image_url}}" alt="{{$category->slug}}" width="100"
-                            class="img-thumbnail img-fluid">
-                        @else
-                        <img src="{{asset('assets/admin')}}/images/portrait/small/avatar-s-19.png"
-                            alt="{{$category->slug}}" class="img-thumbnail img-fluid">
-                        @endif
+
                     </div>
                 </div>
 

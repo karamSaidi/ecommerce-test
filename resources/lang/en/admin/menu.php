@@ -8,9 +8,8 @@ return [
     'shipping_outer' => 'Shipping Outer',
 
     'categories' => 'Categories',
+    'categories_list' => 'Categories List',
     'main_categories' => 'Main Categories',
-    'main_categories_list' => 'Main Categories List',
-    'sub_categories_list' => 'Sub Categories List',
     'categories_create' => 'New Category',
 
     'brands' => 'Brands',
