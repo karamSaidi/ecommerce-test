@@ -63,6 +63,17 @@ Route::group(
                     Route::delete('/destroy/{id}', 'BrandsController@destroy')->name('brands.destroy');
                 });
                 /*************************** ./brands */
+
+                /*************************** tags */
+                Route::group(['prefix' => 'tags'], function () {
+                    Route::get('/index', 'TagsController@index')->name('tags');
+                    Route::get('/create', 'TagsController@create')->name('tags.create');
+                    Route::post('/store', 'TagsController@store')->name('tags.store');
+                    Route::get('/edit/{id}', 'TagsController@edit')->name('tags.edit');
+                    Route::put('/update/{id}', 'TagsController@update')->name('tags.update');
+                    Route::delete('/destroy/{id}', 'TagsController@destroy')->name('tags.destroy');
+                });
+                /*************************** ./tags */
             });
             // **********************  ./ auth **********************
 

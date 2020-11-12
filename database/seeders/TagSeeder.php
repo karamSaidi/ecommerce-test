@@ -2,14 +2,11 @@
 
 namespace Database\Seeders;
 
-use App\Jobs\BrandImageResizeJob;
-use App\Models\Brand;
+use App\Models\Tag;
 use Faker\Factory;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Str;
 
-class BrandSeeder extends Seeder
+class TagSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -23,38 +20,24 @@ class BrandSeeder extends Seeder
 
     private function fakeData($count)
     {
-        // Get all files in a directory
-        $files =   Storage::disk('brands')->allFiles('');
-
-        // Delete Files
-        Storage::disk('brands')->delete($files);
 
         $faker_ar = Factory::create('ar_SA');
         $faker_en = Factory::create('en_US');
         // $faker_fr = Factory::create('fr_FR');
-
-        $tmp_images = collect(Storage::disk('public')->files('background'));
 
 
         for ($i = 0; $i < $count; $i++) {
             $name_ar = $faker_ar->unique()->name(random_int(2, 10));
             $name_en = $faker_en->unique()->name(random_int(2, 10));
 
-            $slug = Str::slug($name_en);
-
-            $temp = $tmp_images->random();
-            $image = "$slug.jpg";
-            Storage::disk('brands')->put($image, Storage::disk('public')->get($temp));
-            dispatch(new BrandImageResizeJob('brands', $image));
 
             $data = [
-                'image' => $image,
                 'status' => $faker_en->boolean(),
                 'en' => ['name' => $name_en],
                 'ar' => ['name' => $name_ar],
             ];
 
-            Brand::create($data);
+            Tag::create($data);
         }
     }
 }
