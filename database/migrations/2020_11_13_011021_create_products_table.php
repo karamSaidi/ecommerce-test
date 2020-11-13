@@ -15,7 +15,7 @@ class CreateProductsTable extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('brand_id')->constrained('brands', 'id')->onDelete('set null');
+            $table->foreignId('brand_id')->nullable()->constrained('brands', 'id')->onDelete('set null');
             $table->decimal('price', 18, 4)->unsigned();
             $table->decimal('special_price', 18, 4)->unsigned()->nullable();
             $table->string('special_price_type')->nullable();
@@ -66,6 +66,8 @@ class CreateProductsTable extends Migration
      */
     public function down()
     {
+        Schema::dropIfExists('product_tags');
+        Schema::dropIfExists('product_categories');
         Schema::dropIfExists('product_translations');
         Schema::dropIfExists('products');
     }

@@ -31,6 +31,14 @@ class Brand extends Model
         return $this->image ? asset('upload/brands/' . $this->image) : null;
     } // ./getImageUrlAttribute
 
+
+    /***************************** Relation */
+    public function products()
+    {
+        return $this->hasMany(Product::class, 'brand_id', 'id');
+    }
+    /***************************** ./Relation */
+
 } // ./Brand
 
 
