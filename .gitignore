@@ -4,6 +4,7 @@
 /publick/upload
 /storage/*.key
 /vendor
+/temp
 .env
 .env.backup
 .phpunit.result.cache
