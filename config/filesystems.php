@@ -51,7 +51,28 @@ return [
         'public' => [
             'driver' => 'local',
             'root' => storage_path('app/public'),
-            'url' => env('APP_URL').'/storage',
+            'url' => env('APP_URL') . '/storage',
+            'visibility' => 'public',
+        ],
+
+        'admin' => [
+            'driver' => 'local',
+            'root' => public_path('upload/admin/avatar'),
+            'url' => env('APP_URL') . '/storage',
+            'visibility' => 'public',
+        ],
+
+        'categories' => [
+            'driver' => 'local',
+            'root' => public_path('upload/categories'),
+            'url' => env('APP_URL') . '/storage',
+            'visibility' => 'public',
+        ],
+
+        'brands' => [
+            'driver' => 'local',
+            'root' => public_path('upload/brands'),
+            'url' => env('APP_URL') . '/storage',
             'visibility' => 'public',
         ],
 
