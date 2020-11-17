@@ -34,7 +34,13 @@ class Product extends Model
         'status' => 'boolean',
         'manage_stock' => 'boolean',
         'in_stock' => 'boolean',
+        'created_at' => 'datetime',
+        'updated_at' => 'datetime',
+        'special_price_start' => 'datetime',
+        'special_price_end' => 'datetime'
+
     ];
+
 
     protected $apend = [
         // 'image_url',
@@ -53,8 +59,10 @@ class Product extends Model
     }
     public function tags()
     {
-        return $this->belongsToMany(Tags::class, 'product_tags', 'product_id', 'tag_id');
+        return $this->belongsToMany(Tag::class, 'product_tags', 'product_id', 'tag_id');
     }
+
+
 
     /***************************** ./Relation */
 

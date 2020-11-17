@@ -4,6 +4,8 @@ return [
     'not_found' => 'Record Not Found',
     'confirm_delete' => 'Are you sure Delete this record',
     'save' => 'Save',
+    'edit' => 'Edit',
+    'delete' => 'Delete',
     'updated_success' => 'Record Updated Successfully',
     'created_success' => 'Record Created Successfully',
     'deleted_success' => 'Record deleted Successfully',
@@ -21,6 +23,7 @@ return [
 
     'inactive' => 'Inactive',
     'active' => 'Active',
+    'price' => 'Price',
 
     'name' => 'Name',
     'slug' =>     'Slug',

@@ -31,9 +31,11 @@ class Tag extends Model
     }
     /***************************** ./Relation */
 
-
     /***************************** Scope */
-
+    public function scopeActive($query)
+    {
+        return $query->where('status', 1);
+    }
     /***************************** ./Scope */
 } // ./Tag
 

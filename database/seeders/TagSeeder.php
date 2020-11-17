@@ -27,8 +27,8 @@ class TagSeeder extends Seeder
 
 
         for ($i = 0; $i < $count; $i++) {
-            $name_ar = $faker_ar->unique()->name(random_int(2, 10));
-            $name_en = $faker_en->unique()->name(random_int(2, 10));
+            $name_ar = $faker_ar->unique()->name(random_int(1, 3));
+            $name_en = $faker_en->unique()->name(random_int(1, 3));
 
 
             $data = [

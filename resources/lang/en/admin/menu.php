@@ -20,5 +20,9 @@ return [
     'tags_list' => 'Tags List',
     'tags_create' => 'New Tag',
 
+    'products' => 'Products',
+    'products_list' => 'Products List',
+    'products_create' => 'New Product',
+
 
 ];

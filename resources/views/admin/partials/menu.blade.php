@@ -133,6 +133,32 @@
             </li>
             {{-- *********************** ./tags --}}
 
+            {{-- *********************** products --}}
+            <li class="nab-item">
+                <a href="{{route('admin.products')}}">
+                    <i class="la la-cog"></i>
+                    <span class="menu-title" data-i18n="nav.products">{{__('admin/menu.products')}}</span>
+                </a>
+                <ul class="menu-content">
+
+                    <li class="@if(request()->is('*admin/products/index')) active @else nav-item @endif">
+                        <a href="{{route('admin.products')}}">
+                            <i class="la la-list"></i>
+                            <span class="menu-title" data-i18n="nav.products.list">{{__('admin/menu.products_list')}}</span>
+                        </a>
+                    </li>
+
+                    <li class="@if(request()->is('*admin/products/create-general-information')) active @else nav-item @endif">
+                        <a href="{{route('admin.products_general.create')}}">
+                            <i class="la la-plus"></i>
+                            <span class="menu-title" data-i18n="nav.products.create">{{__('admin/menu.products_create')}}</span>
+                        </a>
+                    </li>
+
+                </ul>
+            </li>
+            {{-- *********************** ./products --}}
+
 
 
 

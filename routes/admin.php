@@ -74,6 +74,25 @@ Route::group(
                     Route::delete('/destroy/{id}', 'TagsController@destroy')->name('tags.destroy');
                 });
                 /*************************** ./tags */
+
+                /*************************** products */
+                Route::group(['prefix' => 'products'], function () {
+                    Route::get('/index', 'ProductsController@index')->name('products');
+
+                    Route::get('/create-general-information', 'ProductsController@create')->name('products_general.create');
+                    Route::post('/store-general-information', 'ProductsController@store')->name('products_general.store');
+
+                    Route::get('/price-information/{product_id}', 'ProductsController@getProductPrice')->name('products_price.get');
+                    Route::post('/store-price-information', 'ProductsController@saveProductPrice')->name('products_price.store');
+
+                    Route::get('/stock-information/{product_id}', 'ProductsController@getProductStock')->name('products_stock.get');
+                    Route::post('/store-stock-information', 'ProductsController@saveProductStock')->name('products_stock.store');
+
+                    Route::get('/edit/{id}', 'ProductsController@edit')->name('products.edit');
+                    Route::put('/update/{id}', 'ProductsController@update')->name('products.update');
+                    Route::delete('/destroy/{id}', 'ProductsController@destroy')->name('products.destroy');
+                });
+                /*************************** ./products */
             });
             // **********************  ./ auth **********************
 

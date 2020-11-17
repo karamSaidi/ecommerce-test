@@ -26,8 +26,8 @@ class CategorySeeder extends Seeder
 
         // \App\Models\Category::factory(15)->create();
         // \App\Models\Category::factory(35)->create();
-        $this->fakeData(20);
-        $this->fakeData(50);
+        $this->fakeData(10);
+        $this->fakeData(30);
     }
 
     private function fakeData($count)
@@ -43,8 +43,8 @@ class CategorySeeder extends Seeder
 
 
         for ($i = 0; $i < $count; $i++) {
-            $name_ar = $faker_ar->unique()->name(random_int(2, 10));
-            $name_en = $faker_en->unique()->name(random_int(2, 10));
+            $name_ar = $faker_ar->unique()->name(random_int(1, 5));
+            $name_en = $faker_en->unique()->name(random_int(1, 5));
 
             $slug = Str::slug($name_en);
 

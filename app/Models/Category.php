@@ -63,6 +63,10 @@ class Category extends Model
     {
         return $query->whereNotNull('parent_id');
     }
+    public function scopeActive($query)
+    {
+        return $query->where('status', 1);
+    }
     /***************************** ./Scope */
 } // ./Category
 
