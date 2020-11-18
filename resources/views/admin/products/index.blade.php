@@ -70,6 +70,10 @@
                                             class="btn btn-outline-success btn-sm">
                                             {{ __('admin/products.stock') }}
                                         </a>
+                                        <a href="{{route('admin.products_image.get', $product->id)}}"
+                                            class="btn btn-outline-success btn-sm">
+                                            {{ __('admin/products.images') }}
+                                        </a>
                                         <a href="{{route('admin.products.edit', $product->id)}}" title="{{ __('general.edit') }}"
                                             class="btn btn-outline-info btn-sm">
                                             <i class="la la-edit"></i>

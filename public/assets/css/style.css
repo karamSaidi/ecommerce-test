@@ -21,3 +21,9 @@ table .btn-group .btn {
     margin-right: 2px;
     margin-left: 2px;
 }
+
+.product-images .card-img-top{
+    height: 300px !important;
+    border:1px solid #222;
+    padding:0.25rem;
+}

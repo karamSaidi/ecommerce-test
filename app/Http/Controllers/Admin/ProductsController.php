@@ -5,12 +5,15 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\CategoryRequest;
 use App\Http\Requests\Admin\ProductGeneralRequest;
+use App\Http\Requests\Admin\ProductImageRequest;
+use App\Http\Requests\Admin\ProductImageUploadRequest;
 use App\Http\Requests\Admin\ProductPriceRequest;
 use App\Http\Requests\Admin\ProductStockRequest;
 use App\Jobs\CategoryImageResizeJob;
 use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Product;
+use App\Models\ProductImage;
 use App\Models\Tag;
 use Illuminate\Support\Facades\DB;
 
@@ -119,7 +122,6 @@ class ProductsController extends Controller
         }
     }
 
-
     public function saveProductStock(ProductStockRequest $request)
     {
         try {
@@ -142,6 +144,104 @@ class ProductsController extends Controller
                 ->with(['error' => __('general.error_happen')]);
         }
     }
+
+
+
+    public function getProductImage($product_id)
+    {
+        try {
+            $product = Product::where('id', $product_id)->select('id')->with('images')->first();
+
+            if (!$product)
+                return redirect()->route('admin.products')
+                ->with(['error' => __('general.not_found')]);
+
+            return view('admin.products.stock.create', compact('product'));
+        } catch (\Exception $ex) {
+            dd($ex);
+            return redirect()->route('admin.products')
+            ->with(['error' => __('general.error_happen')]);
+        }
+    }
+
+    public function saveProductImage(ProductImageRequest $request)
+    {
+        try {
+            $product = Product::where('id', $request->product_id)->first();
+            if (!$product)
+                return redirect()->route('admin.products')
+                ->with(['error' => __('general.not_found')]);
+
+            DB::beginTransaction();
+            $images = [];
+            foreach(request()->images as $image){
+                $images[] = ['image' => $image];
+                // $product->images()->create(['image' => $image]);
+            }
+            $product->images()->createMany($images);
+            DB::commit();
+            return redirect()->route('admin.products')
+                ->with(['success' => __('general.updated_success')]);
+
+        } catch (\Exception $ex) {
+            DB::rollback();
+            dd($ex);
+            return redirect()->route('admin.products')
+                ->with(['error' => __('general.error_happen')]);
+        }
+    }
+
+    public function uploadProductImage(ProductImageUploadRequest $request)
+    {
+        try {
+            if ($request->has('dzfile')) {
+
+                $data = upload_file($request->dzfile, 'products');
+                // resize image in background
+                // dispatch(new BrandImageResizeJob('brands', $data['image']));
+                return response()->json([
+                    'status' => true,
+                    'name' => $data['file_path'],
+                    ]);
+            }
+        } catch (\Exception $ex) {
+            return response()->json(['status' => false, 'msg' => __('general.error_happen')]);
+        }
+
+    }
+    public function removeProductImage()
+    {
+        try {
+            request()->validate(['name' => 'required|string']);
+            delete_storage_file('products', request()->name);
+            return response()->json(['status' => true, 'msg' => __('general.deleted_success')], 200);
+
+
+        } catch (\Exception $ex) {
+            return response()->json(['status' => false, 'msg' => __('general.error_happen'), 'ex' => $ex], 201);
+        }
+
+    }
+    public function removeProductImageFile($image_id)
+    {
+        try {
+            $image = ProductImage::where('id', $image_id)->first();
+            if (!$image)
+                return redirect()->route('admin.products')
+                ->with(['error' => __('general.not_found')]);
+
+            $image->delete();
+            delete_storage_file('products', $image->image);
+
+            return redirect()->route('admin.products_image.get', $image->product_id)->with('success',  __('general.deleted_success'));
+        } catch (\Exception $ex) {
+            return redirect()->route('admin.products')
+            ->with(['error' => __('general.error_happen')]);
+        }
+
+    }
+
+
 
     public function show($id)
     {

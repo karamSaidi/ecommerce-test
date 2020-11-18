@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Http\Requests\Admin\ProductImageRequest;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Astrotomic\Translatable\Translatable;
@@ -61,9 +62,10 @@ class Product extends Model
     {
         return $this->belongsToMany(Tag::class, 'product_tags', 'product_id', 'tag_id');
     }
-
-
-
+    public function images()
+    {
+        return $this->hasMany(ProductImage::class, 'product_id', 'id');
+    }
     /***************************** ./Relation */
 
 

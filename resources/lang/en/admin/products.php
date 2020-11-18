@@ -33,5 +33,17 @@ return [
 'not_avalable' => 'Not Avalable',
 'avalable' => 'Avalable',
 
+'images' => 'Product Images',
+'drop_files_here_to_upload' => 'Drop files here to upload',
+'fallback_message' => 'Fallback Message',
+'fallback_message' => 'fallback_message',
+'file_type_not_allow' => 'File type not allowed',
+'cancel_upload' => 'Cancel upload',
+'confirm_cancel_upload' => 'Confirm cancel upload',
+'remove_file' => 'remove',
+'max_files_exceeded' => 'You exceeded Max file size',
+'file_type_error' => "You can't upload files of this type.",
+
+
 
 ];

@@ -32,67 +32,18 @@
 <div class="card">
 
     <div class="card-body">
-        <form class="form" method="post" action="{{route('admin.products_stock.store')}}">
+        <form class="form" method="post" action="{{route('admin.products_image.store')}}">
             @csrf()
             <input type="hidden" name="product_id" value="{{ $product->id }}">
 
             <div class="form-body">
                 <h4 class="form-section">
-                    {{__('admin/products.stock_information')}}
+                    {{__('admin/products.images')}}
                 </h4>
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label>{{__('admin/products.sku')}}</label>
-                            <input type="text" value="{{$product->sku}}"
-                                class="form-control @error('sku') is-invalid @enderror"
-                                placeholder="{{__('admin/products.enter_sku')}}" name="sku">
-                            @error('sku')
-                            <span class="text-danger">{{$message}}</span>
-                            @enderror
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6">
-                        <fieldset class="checkbox">
-                            <input type="checkbox" class="switchery" value="1" {{$product->manage_stock? 'checked': ''}}
-                                name="manage_stock" id="manage_stock">
-                            <label class="ml-1">
-                                {{__('admin/products.manage_stock')}}
-                            </label>
-                        </fieldset>
-                    </div>
-                </div>
+                <div class="form-group">
 
-                <div class="row">
-                    <fieldset  class="col-md-6" @if(!$product->manage_stock) disabled @endif>
-                        <div class="form-group"  id="qty">
-                            <label>{{__('admin/products.qty')}}</label>
-                            <input type="number" value="{{$product->qty}}" step="1"
-                                class="form-control @error('qty') is-invalid @enderror"
-                                placeholder="{{__('admin/products.enter_qty')}}" name="qty">
-                            @error('qty')
-                            <span class="text-danger">{{$message}}</span>
-                            @enderror
-                        </div>
-                    </fieldset >
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label>{{__('admin/products.in_stock')}}</label>
-                            <select class="select2 form-control @error('in_stock') is-invalid @enderror"
-                                name="in_stock">
-                                <optgroup label="{{__('admin/products.special_price_end')}}">
-                                    <option value="0" @if($product->in_stock == '0') selected @endif
-                                        >{{ __('admin/products.not_avalable') }}</option>
-                                    <option value="1" @if($product->in_stock == '1') selected
-                                        @endif >{{ __('admin/products.avalable') }}</option>
-                                </optgroup>
-                            </select>
-                            @error('in_stock')
-                            <span class="text-danger">{{$message}}</span>
-                            @enderror
-                        </div>
+                    <div class="dropzone dropzone-area" id="dpz-multiple-files">
+                        <div class="dz-message">{{ __('admin/products.drop_files_here_to_upload') }}</div>
                     </div>
 
                 </div>
@@ -107,28 +58,104 @@
     </div>
 
 </div>
+<div class="card">
 
+
+    <div class="card-body">
+        <div class="row">
+            @foreach ($product->images as $image)
+            <div class="col-md-3">
+
+                <form action="{{ route('admin.products.image.remove.file', $image->id) }}" method="post">
+                    @csrf
+                    @method('delete')
+                    <div class="card product-images">
+                        <img class="card-img-top" src="{{ asset($image->image_url) }}" alt="">
+                        <div class="card-body text-center">
+                            <div class="btn-group">
+                                <button type="submit" class="btn btn-outline-danger">
+                                    <i class="fa fa-trash" aria-hidden="true"></i> {{ __('general.delete') }}
+                                </button>
+                            </div>
+                        </div>
+                      </div>
+
+                </form>
+
+            </div>
+            @endforeach
+        </div>
+    </div>
+</div>
 
 @endsection
 
+@push('styles')
+<link rel="stylesheet" type="text/css" href="{{asset('assets/admin')}}/vendors/css/file-uploaders/dropzone.min.css">
+<link rel="stylesheet" type="text/css" href="{{asset('assets/admin')}}/css/plugins/file-uploaders/dropzone.css">
+@endpush
+
 @push('scripts')
-    <script>
+<script src="{{asset('assets/admin')}}/vendors/js/extensions/dropzone.min.js" type="text/javascript"></script>
+{{-- <script src="{{asset('assets/admin')}}/js/scripts/extensions/dropzone.js" type="text/javascript"></script> --}}
+<script>
+    var uploadedDocumentMap = {};
+    Dropzone.options.dpzMultipleFiles = {
+        paramName: "dzfile", //the name that will be use to transfer file
+        // autoProcessQueue: false,
+        maxFilesize: 5, //MB
+        clickable: true,
+        addRemoveLinks: true,
+        acceptedFiles: 'image/*',
+        dictFallbackMessage: 'fallback_message',
+        dictInvalidFiletype: 'file_type_not_allow',
+        dictCancelUpload: 'cancel_upload',
+        dictCancelUploadConfirmation: 'confirm_cancel_upload',
+        dictRemoveFile: 'remove_file',
+        dictMaxFilesExceeded: 'max_files_exceeded',
+        dictInvalidFileType: "file_type_error",
+
+        headers: {
+            'X-CSRF-TOKEN': '{{ csrf_token() }}'
+        },
+        url: '{{ route('admin.products.image.upload') }}', //url to upload image
+        success: function(file, response){
+                    $('form').append('<input type="hidden" name="images[]" value="' + response.name +'">');
+                    uploadedDocumentMap[file.name] = response.name;
+                },
+        removedfile: function(file){
+            file.previewElement.remove();
+            var name = '';
+            if(typeof file.file_name !== 'undefined'){
+                name = file.file_name;
+            }
+            else{
+                name = uploadedDocumentMap[file.name];
+
+                $.post("{{ route('admin.products.image.remove') }}", { "name": name, "_token": "{{ csrf_token() }}",} , function( data ) {
+                    if(data.status === false){
+                        name = '';
+                    }
+                });
+            }
+            $('form').find('input[name="images[]"][value="' + name +'"]').remove();
+        } ,
+        // previewsContainer: "#dpz-btn-select-files", //Define the container to display the previes
+        init: function(){
+            @if(isset($event) && $event->document)
+            var files =
+            {!! json_encode($event->document) !!}
+            for(var i in files){
+                var file = files[i];
+                this.options.addedfile.call(this, file);
+                file.previewElement.classList.add('dz-complete');
+                $('form').append('<input type="hidden" name="images[]" value="' + file.file_name + '">');
+            }
+            @endif
+        },
 
 
-        $(document).ready(function () {
-            $('#manage_stock').change(function (e) {
-                e.preventDefault();
-                if($('#manage_stock').is(":checked")){
-                    $('#qty').parent().removeAttr("disabled");
-                }
-                else{
-                    $('#qty').parent().attr('disabled', 'disabled');
+    };
 
-                }
-            });
-
-
-        });
-
-    </script>
+</script>
 @endpush

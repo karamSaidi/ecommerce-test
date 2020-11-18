@@ -88,6 +88,12 @@ Route::group(
                     Route::get('/stock-information/{product_id}', 'ProductsController@getProductStock')->name('products_stock.get');
                     Route::post('/store-stock-information', 'ProductsController@saveProductStock')->name('products_stock.store');
 
+                    Route::get('/images/{product_id}', 'ProductsController@getProductImage')->name('products_image.get');
+                    Route::post('/store-images', 'ProductsController@saveProductImage')->name('products_image.store');
+                    Route::post('/upload-images', 'ProductsController@uploadProductImage')->name('products.image.upload');
+                    Route::post('/remove-images', 'ProductsController@removeProductImage')->name('products.image.remove');
+                    Route::delete('/remove-images/{id}', 'ProductsController@removeProductImageFile')->name('products.image.remove.file');
+
                     Route::get('/edit/{id}', 'ProductsController@edit')->name('products.edit');
                     Route::put('/update/{id}', 'ProductsController@update')->name('products.update');
                     Route::delete('/destroy/{id}', 'ProductsController@destroy')->name('products.destroy');
