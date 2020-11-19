@@ -43,7 +43,10 @@ return [
 'remove_file' => 'remove',
 'max_files_exceeded' => 'You exceeded Max file size',
 'file_type_error' => "You can't upload files of this type.",
-
+'options' => 'Options',
+'options_information' => 'Options Information',
+'potion_name' => 'Option Name',
+'enter_potion_name' => 'Enter Option Name',
 
 
 ];

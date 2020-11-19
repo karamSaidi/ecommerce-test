@@ -49,6 +49,7 @@
                                 <th>{{__('general.slug')}}</th>
                                 <th>{{__('general.price')}}</th>
                                 <th>{{__('general.image')}}</th>
+                                <th>{{__('general.manage')}}</th>
                                 <th>{{__('general.action')}}</th>
                             </tr>
                         </thead>
@@ -59,7 +60,8 @@
                                 <td>{{$product->slug}}</td>
                                 <td>{{$product->price}}</td>
                                 <td class="td-image">
-                                    <img src="" alt="{{$product->name}}" class="img-thumbnail img-fluid"></td>
+                                    <img src="" alt="{{$product->id}}" class="img-thumbnail img-fluid">
+                                </td>
                                 <td>
                                     <div class="btn-group">
                                         <a href="{{route('admin.products_price.get', $product->id)}}"
@@ -67,13 +69,22 @@
                                             {{ __('general.price') }}
                                         </a>
                                         <a href="{{route('admin.products_stock.get', $product->id)}}"
-                                            class="btn btn-outline-success btn-sm">
+                                            class="btn btn-outline-info btn-sm">
                                             {{ __('admin/products.stock') }}
                                         </a>
                                         <a href="{{route('admin.products_image.get', $product->id)}}"
                                             class="btn btn-outline-success btn-sm">
                                             {{ __('admin/products.images') }}
                                         </a>
+                                        <a href="{{route('admin.products_options.get', $product->id)}}"
+                                            class="btn btn-outline-warning btn-sm">
+                                            {{ __('admin/products.options') }}
+                                        </a>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="btn-group">
+
                                         <a href="{{route('admin.products.edit', $product->id)}}" title="{{ __('general.edit') }}"
                                             class="btn btn-outline-info btn-sm">
                                             <i class="la la-edit"></i>

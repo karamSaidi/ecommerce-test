@@ -7,11 +7,14 @@ use App\Http\Requests\Admin\CategoryRequest;
 use App\Http\Requests\Admin\ProductGeneralRequest;
 use App\Http\Requests\Admin\ProductImageRequest;
 use App\Http\Requests\Admin\ProductImageUploadRequest;
+use App\Http\Requests\Admin\ProductOptionRequest;
 use App\Http\Requests\Admin\ProductPriceRequest;
 use App\Http\Requests\Admin\ProductStockRequest;
 use App\Jobs\CategoryImageResizeJob;
+use App\Models\Attribute;
 use App\Models\Brand;
 use App\Models\Category;
+use App\Models\Option;
 use App\Models\Product;
 use App\Models\ProductImage;
 use App\Models\Tag;
@@ -22,7 +25,11 @@ class ProductsController extends Controller
 
     public function index()
     {
-        $products = Product::latest('id')->select('id', 'price', 'status')->paginate(config('general.paginate_number'));
+        $products = Product::latest('id')->select('id', 'price', 'status')
+        ->with(['translations' => function($trans){
+            $trans->select('locale', 'product_id', 'name', 'slug');
+        }])
+        ->paginate(config('general.paginate_number'));
         return view('admin.products.index', compact('products'));
     }
 
@@ -89,6 +96,7 @@ class ProductsController extends Controller
                 return redirect()->route('admin.products')
                 ->with(['error' => __('general.not_found')]);
 
+            DB::beginTransaction();
             $product->update($request->only(['product_id', 'price', 'special_price', 'special_price_start', 'special_price_end', 'special_price_type']));
 
             DB::commit();
@@ -96,7 +104,7 @@ class ProductsController extends Controller
                 ->with(['success' => __('general.updated_success')]);
 
         } catch (\Exception $ex) {
-
+            DB::rollback();
             dd($ex);
             return redirect()->route('admin.products')
                 ->with(['error' => __('general.error_happen')]);
@@ -131,6 +139,7 @@ class ProductsController extends Controller
                 return redirect()->route('admin.products')
                 ->with(['error' => __('general.not_found')]);
 
+            DB::beginTransaction();
             $product->update($request->only(['sku','manage_stock','qty','in_stock']));
 
             DB::commit();
@@ -138,7 +147,7 @@ class ProductsController extends Controller
                 ->with(['success' => __('general.updated_success')]);
 
         } catch (\Exception $ex) {
-
+            DB::rollback();
             dd($ex);
             return redirect()->route('admin.products')
                 ->with(['error' => __('general.error_happen')]);
@@ -243,10 +252,129 @@ class ProductsController extends Controller
 
 
 
+    public function getProductOptions($product_id)
+    {
+        try {
+            $product = Product::where('id', $product_id)
+            ->select('id')
+            ->with(['options' => function($options){
+                $options->select('id', 'attribute_id', 'price', 'product_id')->with(['attribute' => function($attr){
+                    $attr->select('id');
+                }]);
+            }, 'translations' => function($trans){
+                $trans->select('locale', 'product_id',  'name', 'slug');
+            }])->first();
+
+            if (!$product)
+                return redirect()->route('admin.products')
+                ->with(['error' => __('general.not_found')]);
+
+            $attributes = Attribute::get();
+
+            return view('admin.products.options.create', compact('product', 'attributes'));
+        } catch (\Exception $ex) {
+            dd($ex);
+            return redirect()->route('admin.products')
+            ->with(['error' => __('general.error_happen')]);
+        }
+    }
+
+    public function saveProductOptions(ProductOptionRequest $request)
+    {
+        try {
+            $product = Product::where('id', $request->product_id)->first();
+            if (!$product)
+            return redirect()->route('admin.products')
+            ->with(['error' => __('general.not_found')]);
+
+
+            DB::beginTransaction();
+            $product->options()->create($request->only('attribute_id', 'name', 'price'));
+
+            DB::commit();
+            return redirect()->route('admin.products_options.get', $product->id)
+                ->with(['success' => __('general.updated_success')]);
+
+        } catch (\Exception $ex) {
+            DB::rollback();
+            dd($ex);
+            return redirect()->route('admin.products_options.get', $product->id)
+                ->with(['error' => __('general.error_happen')]);
+        }
+    }
+
+    public function productOptionsEdit($id)
+    {
+        try {
+
+            $option = Option::where('id', $id)
+            ->with(['attribute' => function($attr){
+                $attr->select('id');
+            }])
+            ->first();
+            if (!$option)
+                return redirect()->route('admin.products')
+                    ->with(['error' => __('general.not_found')]);
+
+            $attributes = Attribute::get();
+            return view('admin.products.options.edit', compact('option', 'attributes'));
+        } catch (\Exception $ex) {
+            dd($ex);
+            return redirect()->route('admin.categories')
+                ->with(['error' => __('general.error_happen')]);
+        }
+    }
+
+    public function updateProductOptions(ProductOptionRequest $request, $option_id)
+    {
+        try {
+            $option = Option::where('id', $option_id)->first();
+            if (!$option)
+                return redirect()->route('admin.products')
+                    ->with(['error' => __('general.not_found')]);
+
+
+            $option->update($request->only('attribute_id', 'name', 'price'));
+            return redirect()->route('admin.products_options.get', $option->product_id)
+                ->with(['success' => __('general.updated_success')]);
+        } catch (\Exception $ex) {
+            dd($ex);
+            return redirect()->route('admin.products_options.get', $option->product_id)
+                ->with(['error' => __('general.error_happen')]);
+        }
+    }
+
+    public function optionDestroy($option_id)
+    {
+        try {
+            $option = Option::where('id', $option_id)->first();
+            if (!$option)
+                return redirect()->route('admin.products')
+                    ->with(['error' => __('general.not_found')]);
+
+            // if there any order to this product can't delete
+            if($option->product){
+
+            }
+            else
+                $option->delete();
+
+            return redirect()->route('admin.products_options.get', $option->product_id)
+                ->with(['success' => __('general.deleted_success')]);
+        } catch (\Exception $ex) {
+            dd($ex);
+            return redirect()->route('admin.products_options.get', $option->product_id)
+                ->with(['error' => __('general.error_happen')]);
+        }
+    }
+
+
+
     public function show($id)
     {
         //
     }
+
 
     public function edit($id)
     {

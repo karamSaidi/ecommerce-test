@@ -24,5 +24,14 @@ return [
     'products_list' => 'Products List',
     'products_create' => 'New Product',
 
+    'attributes' => 'Attributes',
+    'attributes_list' => 'Attributes List',
+    'attributes_create' => 'New Attribute',
+
+    'options' => 'Options',
+    'options_list' => 'Options List',
+    'options_create' => 'New Option',
+
+
 
 ];

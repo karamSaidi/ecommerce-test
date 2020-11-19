@@ -78,28 +78,52 @@ Route::group(
                 /*************************** products */
                 Route::group(['prefix' => 'products'], function () {
                     Route::get('/index', 'ProductsController@index')->name('products');
-
+                    /*************************** products general */
                     Route::get('/create-general-information', 'ProductsController@create')->name('products_general.create');
                     Route::post('/store-general-information', 'ProductsController@store')->name('products_general.store');
-
+                    /*************************** ./products general */
+                    /*************************** products price */
                     Route::get('/price-information/{product_id}', 'ProductsController@getProductPrice')->name('products_price.get');
                     Route::post('/store-price-information', 'ProductsController@saveProductPrice')->name('products_price.store');
-
+                    /*************************** ./products price */
+                    /*************************** products stock */
                     Route::get('/stock-information/{product_id}', 'ProductsController@getProductStock')->name('products_stock.get');
                     Route::post('/store-stock-information', 'ProductsController@saveProductStock')->name('products_stock.store');
-
+                    /*************************** ./products price */
+                    /*************************** products images */
                     Route::get('/images/{product_id}', 'ProductsController@getProductImage')->name('products_image.get');
                     Route::post('/store-images', 'ProductsController@saveProductImage')->name('products_image.store');
                     Route::post('/upload-images', 'ProductsController@uploadProductImage')->name('products.image.upload');
                     Route::post('/remove-images', 'ProductsController@removeProductImage')->name('products.image.remove');
                     Route::delete('/remove-images/{id}', 'ProductsController@removeProductImageFile')->name('products.image.remove.file');
-
+                    /*************************** ./products images */
+                    /*************************** products stock */
+                    Route::get('/options-information/{product_id}', 'ProductsController@getProductOptions')->name('products_options.get');
+                    Route::post('/store-options-information', 'ProductsController@saveProductOptions')->name('products_options.store');
+                    Route::get('/options-edit/{option_id}', 'ProductsController@productOptionsEdit')->name('products_options.edit');
+                    Route::put('/update-options-information/{option_id}', 'ProductsController@updateProductOptions')->name('products_options.update');
+                    Route::delete('/options/destroy/{option_id}', 'ProductsController@optionDestroy')->name('products.options.destroy');
+                    /*************************** ./products price */
                     Route::get('/edit/{id}', 'ProductsController@edit')->name('products.edit');
                     Route::put('/update/{id}', 'ProductsController@update')->name('products.update');
                     Route::delete('/destroy/{id}', 'ProductsController@destroy')->name('products.destroy');
                 });
                 /*************************** ./products */
+
+                /*************************** attributes */
+                Route::group(['prefix' => 'attributes'], function () {
+                    Route::get('/index', 'AttributeController@index')->name('attributes');
+                    Route::get('/create', 'AttributeController@create')->name('attributes.create');
+                    Route::post('/store', 'AttributeController@store')->name('attributes.store');
+                    Route::get('/edit/{id}', 'AttributeController@edit')->name('attributes.edit');
+                    Route::put('/update/{id}', 'AttributeController@update')->name('attributes.update');
+                    Route::delete('/destroy/{id}', 'AttributeController@destroy')->name('attributes.destroy');
+                });
+                /*************************** ./attributes */
             });
+
+
+
             // **********************  ./ auth **********************
 
 

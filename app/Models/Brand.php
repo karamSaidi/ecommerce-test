@@ -52,7 +52,7 @@ class Brand extends Model
 
 class BrandTranslation extends Model
 {
-    protected $table = 'brands_translations';
+    protected $table = 'brand_translations';
     public $timestamps = false;
     protected $fillable = ['name'];
 }// ./CategoryTranslation

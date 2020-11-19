@@ -2,15 +2,15 @@
 
 namespace App\Models;
 
-use App\Http\Requests\Admin\ProductImageRequest;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Astrotomic\Translatable\Translatable;
 use Cviebrock\EloquentSluggable\Sluggable;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Product extends Model
 {
-    use HasFactory, Translatable;
+    use HasFactory, Translatable, SoftDeletes;
 
     protected $table = 'products';
     protected $fillable = [
@@ -65,6 +65,10 @@ class Product extends Model
     public function images()
     {
         return $this->hasMany(ProductImage::class, 'product_id', 'id');
+    }
+    public function options()
+    {
+        return $this->hasMany(option::class, 'product_id', 'id');
     }
     /***************************** ./Relation */
 

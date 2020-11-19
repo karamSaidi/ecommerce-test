@@ -29,8 +29,11 @@ return [
     'slug' =>     'Slug',
     'image' => 'Image',
     'action' => 'Action',
+    'manage' => 'Manage',
     'parent' => 'Parent',
     'childs_count' => 'Childs count',
+    'attributes' => 'Attributes',
+    'options' => 'Options',
 
     'showing' => 'Showing',
     'to' => 'To',

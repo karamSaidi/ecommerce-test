@@ -28,6 +28,7 @@ class CreateProductsTable extends Migration
             $table->boolean('in_stock')->default(0);
             $table->integer('viewed')->unsigned()->default(0);
             $table->boolean('status')->default(1);
+            $table->softDeletes();
 
             $table->timestamps();
         });
