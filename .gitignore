@@ -1,11 +1,7 @@
 /node_modules
 /public/hot
 /public/storage
-<<<<<<< HEAD
 /public/upload
-=======
-
->>>>>>> a71aab7b0dd71ffd463f72f7336d7352df9f3b09
 /storage/*.key
 /vendor
 .env
