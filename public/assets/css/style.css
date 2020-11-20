@@ -9,8 +9,8 @@
 }
 
 table .img-thumbnail {
-    height: 70px !important;
-    width: 150px !important;
+    height: 50px !important;
+    width: 50px !important;
 }
 
 .table td.td-image {
@@ -20,4 +20,10 @@ table .img-thumbnail {
 table .btn-group .btn {
     margin-right: 2px;
     margin-left: 2px;
+}
+
+.product-images .card-img-top{
+    height: 200px !important;
+    border:1px solid #222;
+    padding:0.25rem;
 }

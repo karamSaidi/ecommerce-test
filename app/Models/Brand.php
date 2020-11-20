@@ -31,13 +31,28 @@ class Brand extends Model
         return $this->image ? asset('upload/brands/' . $this->image) : null;
     } // ./getImageUrlAttribute
 
+
+    /***************************** Relation */
+    public function products()
+    {
+        return $this->hasMany(Product::class, 'brand_id', 'id');
+    }
+    /***************************** ./Relation */
+
+    /***************************** Scope */
+    public function scopeActive($query)
+    {
+        return $query->where('status', 1);
+    }
+    /***************************** ./Scope */
+
 } // ./Brand
 
 
 
 class BrandTranslation extends Model
 {
-    protected $table = 'brands_translations';
+    protected $table = 'brand_translations';
     public $timestamps = false;
     protected $fillable = ['name'];
 }// ./CategoryTranslation

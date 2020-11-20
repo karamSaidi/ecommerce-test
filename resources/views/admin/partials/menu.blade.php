@@ -133,7 +133,58 @@
             </li>
             {{-- *********************** ./tags --}}
 
+            {{-- *********************** products --}}
+            <li class="nab-item">
+                <a href="{{route('admin.products')}}">
+                    <i class="la la-cog"></i>
+                    <span class="menu-title" data-i18n="nav.products">{{__('admin/menu.products')}}</span>
+                </a>
+                <ul class="menu-content">
 
+                    <li class="@if(request()->is('*admin/products/index')) active @else nav-item @endif">
+                        <a href="{{route('admin.products')}}">
+                            <i class="la la-list"></i>
+                            <span class="menu-title" data-i18n="nav.products.list">{{__('admin/menu.products_list')}}</span>
+                        </a>
+                    </li>
+
+                    <li class="@if(request()->is('*admin/products/create-general-information')) active @else nav-item @endif">
+                        <a href="{{route('admin.products_general.create')}}">
+                            <i class="la la-plus"></i>
+                            <span class="menu-title" data-i18n="nav.products.create">{{__('admin/menu.products_create')}}</span>
+                        </a>
+                    </li>
+
+                </ul>
+            </li>
+            {{-- *********************** ./products --}}
+
+
+            {{-- *********************** attributes --}}
+            <li class="nab-item">
+                <a href="{{route('admin.attributes')}}">
+                    <i class="la la-cog"></i>
+                    <span class="menu-title" data-i18n="nav.attributes">{{__('admin/menu.attributes')}}</span>
+                </a>
+                <ul class="menu-content">
+
+                    <li class="@if(request()->is('*admin/attributes/index')) active @else nav-item @endif">
+                        <a href="{{route('admin.attributes')}}">
+                            <i class="la la-list"></i>
+                            <span class="menu-title" data-i18n="nav.attributes.list">{{__('admin/menu.attributes_list')}}</span>
+                        </a>
+                    </li>
+
+                    <li class="@if(request()->is('*admin/attributes/create')) active @else nav-item @endif">
+                        <a href="{{route('admin.attributes.create')}}">
+                            <i class="la la-plus"></i>
+                            <span class="menu-title" data-i18n="nav.attributes.create">{{__('admin/menu.attributes_create')}}</span>
+                        </a>
+                    </li>
+
+                </ul>
+            </li>
+            {{-- *********************** ./attributes --}}
 
 
         </ul>

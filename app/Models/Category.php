@@ -46,6 +46,11 @@ class Category extends Model
     {
         return $this->belongsTo(self::class, 'parent_id', 'id');
     }
+
+    public function products()
+    {
+        return $this->belongsToMany(Product::class, 'product_categories', 'category_id', 'product_id');
+    }
     /***************************** ./Relation */
 
 
@@ -57,6 +62,10 @@ class Category extends Model
     public function scopeSub($query)
     {
         return $query->whereNotNull('parent_id');
+    }
+    public function scopeActive($query)
+    {
+        return $query->where('status', 1);
     }
     /***************************** ./Scope */
 } // ./Category
