@@ -23,8 +23,8 @@
     <!-- BEGIN VENDOR CSS-->
     <link rel="stylesheet" type="text/css" href="{{asset('assets/admin')}}/{{get_style_derection()}}/vendors.css">
     <link rel="stylesheet" type="text/css" href="{{asset('assets/admin')}}/vendors/css/ui/prism.min.css">
-    <link rel="stylesheet" type="text/css"
-        href="{{asset('assets/admin')}}/vendors/css/tables/datatable/datatables.min.css">
+    <link rel="stylesheet" type="text/css" href="{{asset('assets/admin')}}/vendors/css/tables/datatable/datatables.min.css">
+
     <link rel="stylesheet" type="text/css" href="{{asset('assets/admin')}}/vendors/css/forms/selects/select2.min.css">
     <!-- END VENDOR CSS-->
     <!-- BEGIN MODERN CSS-->
@@ -89,7 +89,7 @@
     <!-- END MODERN JS-->
     <!-- BEGIN PAGE LEVEL JS-->
     <!-- END PAGE LEVEL JS-->
-    <script src="{{asset('assets/admin')}}/js/scripts/tables/datatables/datatable-basic.js" type="text/javascript">
+    {{-- <script src="{{asset('assets/admin')}}/js/scripts/tables/datatables/datatable-basic.js" type="text/javascript"> --}}
 
     </script>
     <script src="{{asset('assets/admin')}}/vendors/js/forms/toggle/bootstrap-switch.min.js" type="text/javascript">
@@ -108,6 +108,11 @@
                     e.preventDefault();
                 }
 
+            });
+            $('.zero-configuration').dataTable({
+                "paging":   false,
+                "ordering": false,
+                "info":     false
             });
         });
 
