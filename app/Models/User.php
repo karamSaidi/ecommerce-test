@@ -19,8 +19,10 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
-        'email',
+        // 'email',
+        'mobile',
         'password',
+        'verified_at',
     ];
 
     /**
@@ -39,6 +41,16 @@ class User extends Authenticatable
      * @var array
      */
     protected $casts = [
-        'email_verified_at' => 'datetime',
+        'verified_at' => 'datetime',
     ];
+
+
+
+    /***************************** Relation */
+    public function verificationCode()
+    {
+        return $this->hasMany(UserVerification::class, 'user_id', 'id');
+    }
+
+    /***************************** ./Relation */
 }

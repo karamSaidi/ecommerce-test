@@ -9,6 +9,8 @@ return [
     'updated_success' => 'Record Updated Successfully',
     'created_success' => 'Record Created Successfully',
     'deleted_success' => 'Record deleted Successfully',
+    'show' => 'Show',
+    'hide' => 'Hide',
 
     'validate_number' => 'Thid feild must be number',
     'validate_boolean' => 'Thid feild must be boolean',
@@ -34,6 +36,8 @@ return [
     'childs_count' => 'Childs count',
     'attributes' => 'Attributes',
     'options' => 'Options',
+
+
 
     'showing' => 'Showing',
     'to' => 'To',

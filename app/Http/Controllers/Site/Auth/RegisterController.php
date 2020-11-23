@@ -1,11 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace App\Http\Controllers\Site\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Http\Services\VerificationServices;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
@@ -31,6 +33,7 @@ class RegisterController extends Controller
      */
     protected $redirectTo = RouteServiceProvider::HOME;
 
+    protected $verify_code;
     /**
      * Create a new controller instance.
      *
@@ -39,6 +42,7 @@ class RegisterController extends Controller
     public function __construct()
     {
         $this->middleware('guest');
+        $this->verify_code = new VerificationServices();
     }
 
     /**
@@ -51,7 +55,8 @@ class RegisterController extends Controller
     {
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            // 'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'mobile' => ['required', 'string', 'max:255', 'unique:users,mobile'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
     }
@@ -64,10 +69,31 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
-        ]);
+        try {
+
+
+            DB::beginTransaction();
+            $user = User::create([
+                'name' => $data['name'],
+                // 'email' => $data['email'],
+                'mobile' => $data['mobile'],
+                'password' => Hash::make($data['password']),
+            ]);
+
+            // generate code for verify
+            $code = $this->verify_code->set_new_user_mobile_code($user->id);
+
+            // generate message to send
+            $message = $this->verify_code->getSMSVerifyMessageByAppName($code);
+
+            // send code to sms (otp sms) by getaway
+            # app(VectoryLinkSMS::class)->sendSms($user->mobile, $message);
+
+            DB::commit();
+            return $user;
+        } catch (\Exception $ex) {
+            DB::rollback();
+            return \redirect()->route('register')->with(['error' => __('general.error_happen')]);
+        }
     }
 }

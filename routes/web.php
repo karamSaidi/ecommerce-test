@@ -13,11 +13,11 @@ Route::group(
 
 
 
-        Route::get('/', function () {
+        Route::get('/web', function () {
             return 'web route';
         });
 
-        Auth::routes();
+
 
         // Route::get('/home', [HomeController::class, 'index'])->name('home');
 

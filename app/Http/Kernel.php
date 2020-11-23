@@ -62,6 +62,7 @@ class Kernel extends HttpKernel
         'signed' => \Illuminate\Routing\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
+        'verification' => \App\Http\Middleware\VerifyMobileCode::class,
 
         /**** Localization middleware ****/
         'localize'                => \Mcamara\LaravelLocalization\Middleware\LaravelLocalizationRoutes::class,

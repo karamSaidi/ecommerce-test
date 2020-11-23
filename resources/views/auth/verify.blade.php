@@ -1,4 +1,15 @@
-@extends('layouts.app')
+extends('layouts.site')
+
+@section('breadcrumb')
+<ol itemscope="" itemtype="http://schema.org/BreadcrumbList">
+    <li itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem">
+        <a itemprop="item" href="http://demo.bestprestashoptheme.com/savemart/ar/">
+            <span itemprop="name">الصفحة الرئيسية</span>
+        </a>
+        <meta itemprop="position" content="1">
+    </li>
+</ol>
+@endsection
 
 @section('content')
 <div class="container">
