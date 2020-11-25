@@ -90,6 +90,7 @@ Route::group(
                     Route::get('/stock-information/{product_id}', 'ProductsController@getProductStock')->name('products_stock.get');
                     Route::post('/store-stock-information', 'ProductsController@saveProductStock')->name('products_stock.store');
                     /*************************** ./products price */
+
                     /*************************** products images */
                     Route::get('/images/{product_id}', 'ProductsController@getProductImage')->name('products_image.get');
                     Route::post('/store-images', 'ProductsController@saveProductImage')->name('products_image.store');
@@ -97,12 +98,14 @@ Route::group(
                     Route::post('/remove-images', 'ProductsController@removeProductImage')->name('products.image.remove');
                     Route::delete('/remove-images/{id}', 'ProductsController@removeProductImageFile')->name('products.image.remove.file');
                     /*************************** ./products images */
-                    /*************************** products stock */
+
+                    /*************************** products options */
                     Route::get('/options-information/{product_id}', 'ProductsController@getProductOptions')->name('products_options.get');
                     Route::post('/store-options-information', 'ProductsController@saveProductOptions')->name('products_options.store');
                     Route::get('/options-edit/{option_id}', 'ProductsController@productOptionsEdit')->name('products_options.edit');
                     Route::put('/update-options-information/{option_id}', 'ProductsController@updateProductOptions')->name('products_options.update');
                     Route::delete('/options/destroy/{option_id}', 'ProductsController@optionDestroy')->name('products.options.destroy');
+
                     /*************************** ./products price */
                     Route::get('/edit/{id}', 'ProductsController@edit')->name('products.edit');
                     Route::put('/update/{id}', 'ProductsController@update')->name('products.update');
@@ -120,10 +123,18 @@ Route::group(
                     Route::delete('/destroy/{id}', 'AttributeController@destroy')->name('attributes.destroy');
                 });
                 /*************************** ./attributes */
+
+                /*************************** sliders */
+                Route::group(['prefix' => 'sliders'], function () {
+                    Route::get('/index', 'SliderController@index')->name('sliders');
+                    Route::post('/store-images', 'SliderController@saveSliderImage')->name('slider_image.store');
+                    Route::post('/upload-images', 'SliderController@uploadSliderImage')->name('slider.image.upload');
+                    Route::post('/remove-images', 'SliderController@removeSliderImage')->name('slider.image.remove');
+                    Route::delete('/remove-images/{id}', 'SliderController@removeSliderImageFile')->name('slider.image.remove.file');
+                });
+                /*************************** ./sliders */
+
             });
-
-
-
             // **********************  ./ auth **********************
 
 

@@ -32,6 +32,8 @@ return [
     'options_list' => 'Options List',
     'options_create' => 'New Option',
 
+    'sliders' => 'sliders',
+
 
 
 ];

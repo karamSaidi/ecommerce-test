@@ -87,6 +87,11 @@
         }
     </style>
 
+
+
+    <link rel="stylesheet" href="{{ asset('assets/site/css/style.css') }}">
+
+
     @stack('styles')
 </head>
 

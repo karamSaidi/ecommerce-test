@@ -13,11 +13,8 @@
                 <li class="breadcrumb-item">
                     <a href="{{route('admin.dashboard')}}">{{__('admin/menu.dashboard')}}</a>
                 </li>
-                <li class="breadcrumb-item">
-                    <a href="{{route('admin.products')}}">{{__('admin/menu.products_list')}}</a>
-                </li>
                 <li class="breadcrumb-item active">
-                    {{__('admin/menu.products_create')}}
+                    {{__('admin/menu.sliders')}}
                 </li>
             </ol>
         </div>
@@ -32,13 +29,12 @@
 <div class="card">
 
     <div class="card-body">
-        <form class="form" method="post" action="{{route('admin.products_image.store')}}">
+        <form class="form" method="post" action="{{route('admin.slider_image.store')}}">
             @csrf()
-            <input type="hidden" name="product_id" value="{{ $product->id }}">
 
             <div class="form-body">
                 <h4 class="form-section">
-                    {{__('admin/products.images')}}
+                    {{__('admin/menu.sliders')}}
                 </h4>
                 <div class="form-group">
 
@@ -63,14 +59,14 @@
 
     <div class="card-body">
         <div class="row">
-            @foreach ($product->images as $image)
+            @foreach ($sliders as $slider)
             <div class="col-md-3">
 
-                <form action="{{ route('admin.products.image.remove.file', $image->id) }}" method="post">
+                <form action="{{ route('admin.slider.image.remove.file', $slider->id) }}" method="post">
                     @csrf
                     @method('delete')
                     <div class="card product-images">
-                        <img class="card-img-top" src="{{ asset($image->image_url) }}" alt="">
+                        <a href="{{ asset($slider->image_url)}}" ><img class="card-img-top" src="{{ asset($slider->image_url) }}" alt=""></a>
                         <div class="card-body text-center">
                             <div class="btn-group">
                                 <button type="submit" class="btn btn-outline-danger">
@@ -118,7 +114,7 @@
         headers: {
             'X-CSRF-TOKEN': '{{ csrf_token() }}'
         },
-        url: '{{ route('admin.products.image.upload') }}', //url to upload image
+        url: '{{ route('admin.slider.image.upload') }}', //url to upload image
         success: function(file, response){
                     $('form').append('<input type="hidden" name="images[]" value="' + response.name +'">');
                     uploadedDocumentMap[file.name] = response.name;
@@ -132,7 +128,7 @@
             else{
                 name = uploadedDocumentMap[file.name];
 
-                $.post("{{ route('admin.products.image.remove') }}", { "name": name, "_token": "{{ csrf_token() }}",} , function( data ) {
+                $.post("{{ route('admin.slider.image.remove') }}", { "name": name, "_token": "{{ csrf_token() }}",} , function( data ) {
                     if(data.status === false){
                         name = '';
                     }

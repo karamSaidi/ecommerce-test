@@ -85,7 +85,7 @@
                                 <td>
                                     <div class="btn-group">
 
-                                        <a href="{{route('admin.products.edit', $product->id)}}" title="{{ __('general.edit') }}"
+                                        {{-- <a href="{{route('admin.products.edit', $product->id)}}" title="{{ __('general.edit') }}"
                                             class="btn btn-outline-info btn-sm">
                                             <i class="la la-edit"></i>
                                         </a>
@@ -96,7 +96,7 @@
                                             <button type="submit" class="btn btn-outline-danger btn-sm" title="{{ __('general.delete') }}">
                                                 <i class="la la-trash"></i>
                                             </button>
-                                        </form>
+                                        </form> --}}
                                     </div>
                                 </td>
                             </tr>

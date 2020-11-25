@@ -165,7 +165,7 @@ class ProductsController extends Controller
                 return redirect()->route('admin.products')
                 ->with(['error' => __('general.not_found')]);
 
-            return view('admin.products.stock.create', compact('product'));
+            return view('admin.products.images.create', compact('product'));
         } catch (\Exception $ex) {
             dd($ex);
             return redirect()->route('admin.products')

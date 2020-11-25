@@ -48,6 +48,15 @@
                         </ul>
                     </li>
                     {{-- *********************** ./shipping --}}
+                    {{-- *********************** sliders --}}
+                    <li class="@if(request()->is('*admin/sliders/index')) active @else nav-item @endif">
+                        <a href="{{route('admin.sliders')}}">
+                            <i class="la la-list"></i>
+                            <span class="menu-title"
+                                data-i18n="nav.settings.sliders">{{__('admin/menu.sliders')}}</span>
+                        </a>
+                    </li>
+                    {{-- *********************** ./sliders --}}
                 </ul>
             </li>
             {{-- *********************** ./settings --}}

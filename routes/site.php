@@ -10,12 +10,8 @@ Route::group(
     function () {
 
         Route::group(['middleware' => ['verification']], function () {
-            Route::get('/home', function () {
-                return view('site.home');
-            })->name('home');
-            Route::get('/', function () {
-                return view('site.home');
-            });
+            Route::get('/home', "HomeController@home")->name('home');
+            Route::get('/', "HomeController@home");
         });
 
         Route::group(['middleware' => ['auth']], function () {
