@@ -28,6 +28,7 @@ class Category extends Model
     protected $apend = [
         'image_url',
     ];
+    protected $hidden = ['translations'];
 
     public function getImageUrlAttribute()
     {
@@ -67,6 +68,7 @@ class Category extends Model
     {
         return $query->where('status', 1);
     }
+
     /***************************** ./Scope */
 } // ./Category
 

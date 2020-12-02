@@ -23,6 +23,8 @@ class Option extends Model
 
     ];
 
+    protected $hidden = ['translations'];
+
 
 
 

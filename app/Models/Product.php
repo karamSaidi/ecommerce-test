@@ -47,6 +47,8 @@ class Product extends Model
         // 'image_url',
     ];
 
+    protected $hidden = ['translations'];
+
 
 
     /***************************** Relation */
@@ -69,6 +71,10 @@ class Product extends Model
     public function options()
     {
         return $this->hasMany(option::class, 'product_id', 'id');
+    }
+    public function wishLists()
+    {
+        return $this->belongsToMany(User::class, 'wish_lists', 'product_id', 'user_id');
     }
     /***************************** ./Relation */
 

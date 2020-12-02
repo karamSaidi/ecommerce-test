@@ -24,28 +24,26 @@
                         </a>
                         <span class="or-text">or</span>
                         <a class="login" href="{{ route('login') }}" rel="nofollow"
-                            title="تسجيل الدخول إلى حسابك">{{ __('auth.login') }}</a>
+                            title="{{ __('site.login_to_your_account') }}">{{ __('auth.login') }}</a>
                         @else
-                        <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
+                        {{-- <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                             {{ Auth::user()->name }}
                         </a>
-
-                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
+                         --}}
+                        {{-- <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown"> --}}
+                            <a  href="{{ route('logout') }}" onclick="event.preventDefault();
                                                  document.getElementById('logout-form').submit();">
-                                {{ __('Logout') }}
+                                {{ __('Logout') }} {{ Auth::user()->name }}
                             </a>
 
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                 @csrf
                             </form>
-                        </div>
+                        {{-- </div> --}}
                         @endguest
                     </div>
 
-                    <!-- begin module:ps_currencyselector/ps_currencyselector.tpl -->
-                    <!-- begin /var/www/demo.bestprestashoptheme.com/public_html/savemart/themes/vinova_savemart/modules/ps_currencyselector/ps_currencyselector.tpl -->
                     <div id="_desktop_currency_selector"
                         class="currency-selector groups-selector hidden-sm-down currentcy-selector-dropdown">
                         <div class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
@@ -70,32 +68,28 @@
 
 
 
-
-                    <!-- end /var/www/demo.bestprestashoptheme.com/public_html/savemart/themes/vinova_savemart/modules/ps_currencyselector/ps_currencyselector.tpl -->
-                    <!-- end module:ps_currencyselector/ps_currencyselector.tpl -->
-
-                    <!-- begin module:ps_languageselector/ps_languageselector.tpl -->
-                    <!-- begin /var/www/demo.bestprestashoptheme.com/public_html/savemart/themes/vinova_savemart/modules/ps_languageselector/ps_languageselector.tpl -->
                     <div id="_desktop_language_selector"
                         class="language-selector groups-selector hidden-sm-down language-selector-dropdown">
                         <div class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
                             role="main">
-                            <span class="expand-more"><img class="img-fluid" src="/savemart/img/l/6.jpg"
-                                    alt="اللغة العربية" width="16" height="11" /></span>
+                            <i class="flag-icon flag-icon-{{ get_flag_by_localization(LaravelLocalization::getCurrentLocale()) }}"></i>
+                            <span class="selected-language"></span>
                         </div>
                         <div class="language-list dropdown-menu">
                             <div class="language-list-content text-left">
+                                @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
                                 <div class="language-item">
                                     <div>
-                                        <a
-                                            href="http://demo.bestprestashoptheme.com/savemart/en/?home=home_3&SubmitCurrency=1&id_currency=1">
-                                            <img class="img-fluid" src="/savemart/img/l/1.jpg" alt="English" width="16"
-                                                height="11" />
-                                            <span>English</span>
+                                        <a class="dropdown-item" rel="alternate" hreflang="{{ $localeCode }}"
+                                        href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}">
+                                        <i class="flag-icon flag-icon-{{get_flag_by_localization($localeCode)}}"></i>
+                                            <span>{{ $properties['native'] }}</span>
                                         </a>
                                     </div>
                                 </div>
-                                <div class="language-item">
+                                @endforeach
+
+                                {{-- <div class="language-item">
                                     <div>
                                         <a
                                             href="http://demo.bestprestashoptheme.com/savemart/fr/?home=home_3&SubmitCurrency=1&id_currency=1">
@@ -144,7 +138,7 @@
                                             <span>اللغة العربية</span>
                                         </a>
                                     </div>
-                                </div>
+                                </div> --}}
                             </div>
                         </div>
                     </div>

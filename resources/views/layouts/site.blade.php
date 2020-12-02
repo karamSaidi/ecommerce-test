@@ -23,7 +23,7 @@
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=yes">
 
 
-
+    <link rel="stylesheet" href="{{ asset('assets\admin') }}\fonts\flag-icon-css\css\flag-icon.min.css">
     {{-- <link rel="icon" type="image/vnd.microsoft.icon" href="/savemart/img/favicon.ico?1531456858"> --}}
     {{-- <link rel="shortcut icon" type="image/x-icon" href="/savemart/img/favicon.ico?1531456858"> --}}
 
@@ -36,8 +36,6 @@
     <link rel="stylesheet"
         href="http://demo.bestprestashoptheme.com/savemart/themes/vinova_savemart/assets/cache/theme-4527f124.css"
         type="text/css" media="all">
-
-
 
 
 
@@ -137,6 +135,7 @@
     <script type="text/javascript"
         src="http://demo.bestprestashoptheme.com/savemart/themes/vinova_savemart/assets/cache/bottom-3c96ed23.js">
     </script>
+
 
     @stack('scripts')
 

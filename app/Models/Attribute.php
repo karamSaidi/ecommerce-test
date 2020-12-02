@@ -14,6 +14,7 @@ class Attribute extends Model
 
     public $translatedAttributes = ['name'];
 
+    protected $hidden = ['translations'];
 
     /***************************** Relation */
     public function options()

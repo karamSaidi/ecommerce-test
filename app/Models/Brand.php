@@ -26,6 +26,8 @@ class Brand extends Model
         'image_url',
     ];
 
+    protected $hidden = ['translations'];
+
     public function getImageUrlAttribute()
     {
         return $this->image ? asset('upload/brands/' . $this->image) : null;

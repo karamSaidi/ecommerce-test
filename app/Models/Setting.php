@@ -21,6 +21,8 @@ class Setting extends Model implements TranslatableContract
         'status' => 'boolean',
     ];
 
+    protected $hidden = ['translations'];
+
     /************************ static function to insert data by key => value ******************* */
     public static function setMany($data)
     {

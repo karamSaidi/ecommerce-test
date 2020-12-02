@@ -51,6 +51,18 @@ class User extends Authenticatable
     {
         return $this->hasMany(UserVerification::class, 'user_id', 'id');
     }
-
+    public function wishLists()
+    {
+        return $this->belongsToMany(Product::class, 'wish_lists', 'user_id', 'product_id');
+    }
     /***************************** ./Relation */
+
+
+
+    public function hasWishList(int $product_id)
+    {
+        return self::wishLists()->where('product_id', $product_id)->exists();
+    }
+
+
 }

@@ -22,7 +22,7 @@ class Tag extends Model
         'status' => 'boolean',
     ];
 
-
+    protected $hidden = ['translations'];
 
     /***************************** Relation */
     public function products()

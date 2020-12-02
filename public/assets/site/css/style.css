@@ -1,3 +1,11 @@
 .nivoSlider img{
     height: 500px !important;
 }
+.product-miniature .thumbnail-container .image-cover{
+    width: 85%;
+    height: 300px;
+}
+
+.in-wish-list{
+    background-color: #2d9ae8 !important;
+}
