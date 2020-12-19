@@ -8,9 +8,9 @@
         </a>
         <meta itemprop="position" content="1">
     </li>
-    <li itemprop="itemListElement" itemscope="" itemtype="{{ route('category.products', $category->slug) }}">
-        <a itemprop="item" href="{{ route('category.products', $category->slug) }}">
-            <span itemprop="name">{{ $category->name }}</span>
+    <li itemprop="itemListElement" itemscope="" itemtype="{{ route('wishlist') }}">
+        <a itemprop="item" href="{{ route('wishlist') }}">
+            <span itemprop="name">my wishlist</span>
         </a>
         <meta itemprop="position" content="2">
     </li>
@@ -25,14 +25,11 @@
         <div class="row">
 
             <div class="block-category hidden-sm-down">
-                <div class="category-cover">
-                    <img class="img-fluid" src="{{ $category->image_url }}" alt="">
-                </div>
-                <h1 class="h1">{{ $category->name }}</h1>
+                <h1 class="h1">Wishlist Products</h1>
             </div>
 
 
-            @include('site.includes.products_lists', ['products' => $products])
+            @include('site.includes.products_lists', ['products' => $wishlist])
 
 
 

@@ -76,6 +76,8 @@ class HomeController extends Controller
         ->select('id', 'price', 'special_price', 'in_stock', 'brand_id')
         ->with(['brand', 'images' => function($q){
             $q->select('id', 'image', 'product_id');
+        }])->with(['categories' => function($categories){
+            $categories->select('id');
         }])->paginate(config('general.site_paginate_number'));
     }
 

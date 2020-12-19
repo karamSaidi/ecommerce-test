@@ -13,6 +13,7 @@ Route::group(
             Route::get('/home', "HomeController@home")->name('home');
             Route::get('/', "HomeController@home");
             Route::get('/category/{slug}', "HomeController@categoryProducts")->name('category.products');
+            Route::get('/product/{slug}', "ProductController@product_details")->name('product.details');
         });
 
         Route::group(['middleware' => ['auth']], function () {
@@ -22,6 +23,7 @@ Route::group(
 
             /************************************ wishList */
             Route::group(['prefix' => 'wish-list'], function(){
+                route::get('/', 'WishListController@index')->name('wishlist');
                 route::get('/add', 'WishListController@store')->name('wish.list.add');
             });
             /************************************ ./wishList */

@@ -24,7 +24,7 @@
                             rel="nofollow" title="تسجيل الدخول إلى حسابك"><i class="header-icon-account"></i></a>
                     </div>
                     <div class="header_link_wishlist">
-                        <a href="http://demo.bestprestashoptheme.com/savemart/ar/module/novblockwishlist/mywishlist"
+                        <a href="{{ route('wishlist') }}"
                             title="My Wishlists">
                             <i class="header-icon-wishlist"></i>
                         </a>

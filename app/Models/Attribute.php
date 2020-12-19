@@ -19,7 +19,7 @@ class Attribute extends Model
     /***************************** Relation */
     public function options()
     {
-        return $this->hasMany(Attribute::class, 'attribute_id', 'id');
+        return $this->hasMany(Option::class, 'attribute_id', 'id');
     }
     /***************************** ./Relation */
 

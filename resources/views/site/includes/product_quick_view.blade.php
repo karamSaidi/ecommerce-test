@@ -120,11 +120,11 @@
                                         </button>
                                     </div>
 
-                                    <a class="addToWishlist wishlistProd_12" href="#" data-rel="12"
-                                        onclick="WishlistCart('wishlist_block_list', 'add', '12', false, 1); return false;">
+                                    <a class="addToWishlist wishlistProd_12" href="#" data-rel="1" data-product-id="{{ $product->id }}">
                                         <i class="fa fa-heart"></i>
                                         <span>Add to Wishlist</span>
                                     </a>
+
 
                                     <div class="clearfix"></div>
 
