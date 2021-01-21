@@ -14,6 +14,17 @@ Route::group(
             Route::get('/', "HomeController@home");
             Route::get('/category/{slug}', "HomeController@categoryProducts")->name('category.products');
             Route::get('/product/{slug}', "ProductController@product_details")->name('product.details');
+
+
+            /************************************ cart */
+            Route::group(['prefix' => 'cart'], function(){
+                route::get('/', 'CartController@index')->name('cart');
+                route::post('/add/{slug}', 'CartController@add_to_cart')->name('cart.add');
+                route::get('/update/{slug}', 'CartController@update_cart')->name('cart.update');
+                route::get('/update-all', 'CartController@update_all')->name('cart.update-all');
+            });
+            /************************************ ./cart */
+
         });
 
         Route::group(['middleware' => ['auth']], function () {

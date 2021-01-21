@@ -17,6 +17,10 @@ class Attribute extends Model
     protected $hidden = ['translations'];
 
     /***************************** Relation */
+    public function attributes()
+    {
+        return $this->belongsToMany(Product::class, 'options', 'attribute_id', 'product_id');
+    }
     public function options()
     {
         return $this->hasMany(Option::class, 'attribute_id', 'id');

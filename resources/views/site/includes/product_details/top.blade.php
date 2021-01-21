@@ -119,7 +119,7 @@
                                         <div>
                                             @foreach ($product->categories as $category)
                                             <span>
-                                                <a href="{{ route('admin.categories', $category->slug) }}"
+                                                <a href="{{ route('category.products', $category->slug) }}"
                                                     title="{{ $category->name }}">
                                                     {{ $category->name }}
                                                 </a>
@@ -143,37 +143,7 @@
                                 </div>
 
                                 <div id="_desktop_productcart_detail">
-                                    <div class="product-add-to-cart in_border">
-                                        <div class="add">
-                                            <button class="btn btn-primary add-to-cart" data-button-action="add-to-cart"
-                                                type="submit">
-                                                <div class="icon-cart">
-                                                    <i class="shopping-cart"></i>
-                                                </div>
-                                                <span>Add to cart</span>
-                                            </button>
-                                        </div>
-
-                                        <a class="addToWishlist " href="#" data-rel="1"
-                                            data-product-id="{{ $product->id }}">
-                                            <i class="fa fa-heart"></i>
-                                            <span>Add to Wishlist</span>
-                                        </a>
-
-                                        <div class="clearfix"></div>
-
-                                        <div class="info-stock ml-auto">
-                                            <label class="control-label">Availability:</label>
-                                            <i class="fa fa-check-square-o" aria-hidden="true"></i>
-                                            {{ $product->in_stock? 'in stock' : 'out of stock' }}
-                                        </div>
-
-
-                                        <p class="product-minimal-quantity mt-20">
-                                            The minimum purchase order quantity for the product is 2.
-                                        </p>
-
-                                    </div>
+                                    @include('site.includes.product_add')
                                 </div>
 
                                 <input class="product-refresh ps-hidden-by-js" name="refresh" type="submit"
@@ -189,7 +159,7 @@
                                         <div class="input-group bootstrap-touchspin"><span
                                                 class="input-group-addon bootstrap-touchspin-prefix"
                                                 style="display: none;"></span><input type="text" name="qty"
-                                                id="quantity_wanted" value="2" class="input-group form-control" min="2"
+                                                id="quantity_wanted" value="1" class="input-group form-control" min="1"
                                                 style="display: block;"><span
                                                 class="input-group-addon bootstrap-touchspin-postfix"
                                                 style="display: none;"></span><span
@@ -204,25 +174,7 @@
                                     </div>
                                 </div>
 
-                                @if($product_attributes)
-                                <div class="product-variants in_border">
-
-                                    @foreach($product_attributes as $attribute)
-                                    <div class="product-variants-item">
-                                        <span class="control-label">{{ $attribute->name }} : </span>
-                                        <select id="group_{{ $attribute->id }}" data-product-attribute="1"
-                                            name="group[{{ $attribute->id }}]">
-                                            @foreach ($attribute->options as $option)
-                                            <option value="{{ $option->id }}" title="{{ $option->name }}">
-                                                {{ $option->name }}</option>
-                                            @endforeach
-
-                                        </select>
-                                    </div>
-                                    @endforeach
-
-                                </div>
-                                @endif
+                               @include('site.includes.product_variants')
 
                                 <div id="_mobile_productcart_detail"></div>
 

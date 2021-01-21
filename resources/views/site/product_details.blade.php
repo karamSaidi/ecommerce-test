@@ -81,9 +81,7 @@
 
 @endsection
 
-@push('styles')
-<link rel="canonical" href="http://demo.bestprestashoptheme.com/savemart/en/smartphone-tablet/1-hummingbird-printed-t-shirt.html">
-@endpush
+
 
 @push('scripts')
 <script>

@@ -78,7 +78,7 @@ class HomeController extends Controller
             $q->select('id', 'image', 'product_id');
         }])->with(['categories' => function($categories){
             $categories->select('id');
-        }])->paginate(config('general.site_paginate_number'));
+        }])->latest()->paginate(config('general.site_paginate_number'));
     }
 
 

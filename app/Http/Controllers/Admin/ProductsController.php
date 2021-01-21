@@ -284,8 +284,8 @@ class ProductsController extends Controller
         try {
             $product = Product::where('id', $request->product_id)->first();
             if (!$product)
-            return redirect()->route('admin.products')
-            ->with(['error' => __('general.not_found')]);
+                return redirect()->route('admin.products')
+                ->with(['error' => __('general.not_found')]);
 
 
             DB::beginTransaction();

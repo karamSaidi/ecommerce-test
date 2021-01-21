@@ -47,7 +47,7 @@ class Product extends Model
         // 'image_url',
     ];
 
-    protected $hidden = ['translations'];
+    protected $hidden  = ['translations'];
 
 
 
@@ -67,6 +67,10 @@ class Product extends Model
     public function images()
     {
         return $this->hasMany(ProductImage::class, 'product_id', 'id');
+    }
+    public function attributes()
+    {
+        return $this->belongsToMany(Attribute::class, 'options', 'product_id', 'attribute_id', 'id', 'id');
     }
     public function options()
     {

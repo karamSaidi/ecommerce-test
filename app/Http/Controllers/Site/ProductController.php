@@ -14,11 +14,19 @@ class ProductController extends Controller
 
     public function product_details($slug)
     {
+        $product_id =  Product::whereHas('translation', function($q) use($slug){
+            $q->where('slug', $slug);
+        })->first()->id;
+
         $product =  Product::whereHas('translation', function($q) use($slug){
             $q->where('slug', $slug);
-        })->with(['brand', 'categories', 'tags', 'images'])->first();
+        })->with(['brand', 'categories', 'tags', 'images', 'attributes' => function($attr) use ($product_id){
+            $attr->distinct()->with(['options' => function($query) use ($product_id)  {
+                $query->where('product_id', $product_id);
+            }]);
+        }])->first();
 
-        if(!$product){
+        if(!$product_id){
             return redirect()->route('home')->with(['error' => __('general.not_found')]);
         }
 
@@ -30,17 +38,12 @@ class ProductController extends Controller
             }]);
         }])->get();
 
+
         $data['product'] = $product;
 
-        $product_id = $data['product']->id;
-        $data['product_attributes'] = Attribute::select('id')
-        ->whereHas('options', function($options) use($product_id){
-            $options->where('product_id', $product_id);
-        })->with(['options' => function($options){
-            $options->select('id', 'attribute_id');
-        }])->get();
 
-        $categoriesId = $data['product']->categories()->pluck('id');
+      $data['product_attributes'] = $product->attributes;
+        $categoriesId = $product->categories->pluck('id');
         $data['products_related'] = Product::where('id', '!=', $product->id)
         ->whereHas('categories', function($categories) use($categoriesId){
             $categories->whereIn('category_id', $categoriesId);

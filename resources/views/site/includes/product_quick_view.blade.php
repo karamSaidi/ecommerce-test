@@ -60,85 +60,9 @@
                                 <input type="hidden" name="id_product" value="12" id="product_page_product_id">
                                 <input type="hidden" name="id_customization" value="0" id="product_customization_id">
 
-                                <div class="product-variants in_border">
-                                    <div class="product-variants-item">
-                                        <span class="control-label">Size : </span>
-                                        <select id="group_1" data-product-attribute="1" name="group[1]">
-                                            <option value="1" title="S" selected="selected">S</option>
-                                            <option value="2" title="M">M</option>
-                                            <option value="3" title="L">L</option>
-                                            <option value="4" title="XL">XL</option>
-                                        </select>
-                                    </div>
+                                @include('site.includes.product_variants')
 
-                                    <div class="product-variants-item">
-                                        <span class="control-label">Color : </span>
-                                        <ul id="group_2">
-                                            <li class="pull-xs-left input-container">
-                                                <input class="input-color" type="radio" data-product-attribute="2"
-                                                    name="group[2]" value="10">
-                                                <span class="color" style="background-color: #E84C3D"><span
-                                                        class="sr-only">Red</span></span>
-                                            </li>
-                                            <li class="pull-xs-left input-container">
-                                                <input class="input-color" type="radio" data-product-attribute="2"
-                                                    name="group[2]" value="11" checked="checked">
-                                                <span class="color" style="background-color: #434A54"><span
-                                                        class="sr-only">Black</span></span>
-                                            </li>
-                                            <li class="pull-xs-left input-container">
-                                                <input class="input-color" type="radio" data-product-attribute="2"
-                                                    name="group[2]" value="14">
-                                                <span class="color" style="background-color: #5D9CEC"><span
-                                                        class="sr-only">Blue</span></span>
-                                            </li>
-                                            <li class="pull-xs-left input-container">
-                                                <input class="input-color" type="radio" data-product-attribute="2"
-                                                    name="group[2]" value="15">
-                                                <span class="color" style="background-color: #A0D468"><span
-                                                        class="sr-only">Green</span></span>
-                                            </li>
-                                            <li class="pull-xs-left input-container">
-                                                <input class="input-color" type="radio" data-product-attribute="2"
-                                                    name="group[2]" value="17">
-                                                <span class="color" style="background-color: #964B00"><span
-                                                        class="sr-only">Brown</span></span>
-                                            </li>
-                                        </ul>
-                                    </div>
-
-                                </div>
-
-                                <div class="product-add-to-cart in_border">
-                                    <div class="add">
-                                        <button class="btn btn-primary add-to-cart" data-button-action="add-to-cart"
-                                            type="submit">
-                                            <div class="icon-cart">
-                                                <i class="shopping-cart"></i>
-                                            </div>
-                                            <span>Add to cart</span>
-                                        </button>
-                                    </div>
-
-                                    <a class="addToWishlist wishlistProd_12" href="#" data-rel="1" data-product-id="{{ $product->id }}">
-                                        <i class="fa fa-heart"></i>
-                                        <span>Add to Wishlist</span>
-                                    </a>
-
-
-                                    <div class="clearfix"></div>
-
-                                    <div id="product-availability" class="info-stock mt-20">
-                                        <label class="control-label">Availability:</label>
-                                        {{ $product->in_stock? 'in stock' : 'out of stock' }}
-                                        <i class="fa fa-check-square-o" aria-hidden="true"></i>
-                                    </div>
-
-
-                                    <p class="product-minimal-quantity mt-20">
-                                    </p>
-
-                                </div>
+                                @include('site.includes.product_add')
 
                                 <input class="product-refresh" data-url-update="false" name="refresh" type="submit"
                                     value="Refresh" hidden="">

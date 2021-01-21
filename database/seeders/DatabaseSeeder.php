@@ -23,6 +23,7 @@ class DatabaseSeeder extends Seeder
             TagSeeder::class,
             ProductSeeder::class,
             AttributeSeeder::class,
+            OptionSeeder::class,
             SliderSeeder::class,
         ]);
     }

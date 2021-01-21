@@ -19,92 +19,9 @@
 
                         <div class="owl-item active " style="width: 234px;">
                             <div class="item  text-center">
-                                <div class="product-miniature js-product-miniature item-two first_item"
-                                    data-id-product="1" data-id-product-attribute="40" itemscope=""
-                                    itemtype="http://schema.org/Product">
-                                    <div class="product-cat-content">
 
-                                        <div class="category-title">
-                                            <a
-                                                href="{{ route('category.products', $product->categories->first()->slug) }}">
-                                                {{ $product->categories->first()->name }}
-                                            </a>
-                                        </div>
+                                @include('site.includes.product_miniature')
 
-
-                                        <div class="product-title" itemprop="name">
-                                            <a href="{{ route('product.details', $product->slug) }}">
-                                                {{ $product->name }}
-                                            </a>
-                                        </div>
-
-                                    </div>
-                                    <div class="thumbnail-container">
-
-                                        <a href="{{ route('product.details', $product->slug) }}"
-                                            class="thumbnail product-thumbnail two-image">
-                                            @include('site.includes.product_images_home', ['images' =>
-                                            $product->images])
-                                        </a>
-
-                                    </div>
-                                    <div class="product-description">
-                                        <div class="product-groups">
-                                            <div class="product-group-price">
-
-                                                <div class="product-price-and-shipping">
-                                                    @if($product->special_price)
-                                                    <span itemprop="price"
-                                                        class="price">{{ $product->special_price?? '' }}</span>
-                                                    <span class="regular-price">{{ $product->price }}</span>
-                                                    @else
-                                                    <span itemprop="price" class="price">{{ $product->price }}</span>
-                                                    @endif
-                                                </div>
-
-                                            </div>
-                                            <div class="product-comments">
-                                                <div class="star_content">
-                                                    <div class="star star_on"></div>
-                                                    <div class="star star_on"></div>
-                                                    <div class="star star_on"></div>
-                                                    <div class="star star_on"></div>
-                                                    <div class="star star_on"></div>
-                                                </div>
-                                                <span>5 review</span>
-                                            </div>
-                                            <p class="seller_name">
-                                                <a title="View seller profile"
-                                                    href="http://demo.bestprestashoptheme.com/savemart/ar/jmarketplace/1_david-james/">
-                                                    <i class="fa fa-user"></i>
-                                                    David James
-                                                </a>
-                                            </p>
-
-                                        </div>
-                                        <div class="product-buttons d-flex justify-content-center" itemprop="offers"
-                                            itemscope="" itemtype="http://schema.org/Offer">
-                                            <form action="http://demo.bestprestashoptheme.com/savemart/en/cart"
-                                                method="post" class="formAddToCart">
-                                                <input type="hidden" name="token"
-                                                    value="28add935523ef131c8432825597b9928">
-                                                <input type="hidden" name="id_product" value="1">
-                                                <a class="add-to-cart" href="#" data-button-action="add-to-cart"><i
-                                                        class="novicon-cart"></i><span>Add to cart</span></a>
-                                            </form>
-
-                                            <a class="addToWishlist " href="#" data-rel="1"
-                                                data-product-id="{{ $product->id }}">
-                                                <i class="fa fa-heart"></i>
-                                                <span>Add to Wishlist</span>
-                                            </a>
-                                            <a href="#" class="quick-view hidden-sm-down"
-                                                data-product-id="{{ $product->id }}">
-                                                <i class="fa fa-search"></i><span> Quick view</span>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
                         </div>
 
